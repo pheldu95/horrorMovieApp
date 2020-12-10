@@ -6,7 +6,7 @@ import MovieCard from '../MovieCard/MovieCard';
 
 const MovieList = ({movies}) => {
   return (
-    <Grid>
+    <Grid centered className='movieGrid'>
       {movies.map((movie) => {
         return (
           // <Grid.Column >

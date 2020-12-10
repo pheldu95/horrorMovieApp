@@ -7,7 +7,7 @@ import { Card, Image } from 'semantic-ui-react';
 const MovieCard = ({movie}) => {
   
   return (
-    <Image src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} alt='movie poster' className='moviePoster' wrapped ui={false} rounded/>
+    <Image rounded src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} alt='movie poster' className='moviePoster' wrapped ui={false} />
     // <Card className='movieCard'>
     //   <Image src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} alt='movie poster' className='moviePoster' wrapped ui={false} />
     //   <Card.Content>

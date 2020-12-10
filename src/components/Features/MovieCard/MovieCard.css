@@ -1,14 +1,13 @@
-.movieCard{
-    /* text-align: center; */
 
-} 
 
 .moviePoster{
-    cursor: pointer;
-    -webkit-transition : color 500ms ease-out;
-    -moz-transition : color 500ms ease-out;
-    -o-transition : color 500ms ease-out;
-    transition : color 500ms ease-out;
+    transition: transform .2s;
     width: 250px;
+    /* margin-top: 15px; */
+    margin-bottom: 20px;
     /* margin: auto; */
+}
+.moviePoster:hover{
+    cursor: pointer;
+    transform: scale(1.08);
 }
