@@ -1,13 +1,27 @@
 
 
 .moviePoster{
+    border-radius: 10px;
     transition: transform .2s;
     width: 250px;
     /* margin-top: 15px; */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     /* margin: auto; */
 }
 .moviePoster:hover{
+    cursor: pointer;
+    transform: scale(1.08);
+}
+
+.showTitle{
+    border-radius: 10px;
+    transition: transform .2s;
+    width: 250px;
+    /* margin-top: 15px; */
+    margin-bottom: 10px;
+    /* margin: auto; */
+}
+.showTitle:hover{
     cursor: pointer;
     transform: scale(1.08);
 }

@@ -118,7 +118,7 @@ input {
 /* Main Button styles*/
 .bloodbtn {
   /* hue rotate changes the color fo the image. at 0 deg the image is blue, at 125 it is red */
-  filter: hue-rotate(125deg);
+  filter: hue-rotate(140deg);
   display: inline-block;
   padding: 20px 50px;
   margin: 50px 10px;
