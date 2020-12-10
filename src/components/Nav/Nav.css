@@ -6,6 +6,10 @@
     padding-left: 10px;
 }
 
+.nav-title:hover {
+  color: #b90e0a;
+}
+
 .nav {
   margin: 0 0 30px;
   background-color: #100c08;

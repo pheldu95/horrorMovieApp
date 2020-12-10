@@ -60,7 +60,7 @@ class RegisterForm extends Component {
           </label>
         </div>
         <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
+          <input className="bloodbtn bloodbtn-invert red" type="submit" name="submit" value="Register" />
         </div>
       </form>
     );

@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
-import PopularMoviesList from '../Features/PopularMoviesList/PopularMoviesList';
+import MovieList from '../Features/MovieList/MovieList';
 
 class UserPage extends Component {
   state ={
-    popHoror: []
+    movies: []
   }
   componentDidMount(){
-    this.getHorror();
+    this.getPopHorror();
   }
-  getHorror = () => {
+  getPopHorror = () => {
     axios({
       method: 'GET',
       url: '/horror/popular'
@@ -25,7 +25,7 @@ class UserPage extends Component {
       })*/
       console.log('response going to state:', response);
       this.setState({
-        popHorror: response.data
+        movies: response.data
       })
 
     }).catch((error) => {
@@ -36,16 +36,12 @@ class UserPage extends Component {
 
   // this component doesn't do much to start, just renders some user info to the DOM
   render() {
-    let popHorror = this.state.popHorror;
+    let movies = this.state.movies;
     return (
       <div>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-        {popHorror&&
-          popHorror.map((movie) => {
-                return (
-                  <PopularMoviesList movie={movie} />
-                )
-              })
+        {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1> */}
+        {movies&&
+          <MovieList movies={movies}/>
         }
         <LogOutButton className="log-in" />
       </div>

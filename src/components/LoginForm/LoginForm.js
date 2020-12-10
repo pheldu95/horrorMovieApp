@@ -64,7 +64,7 @@ class LoginForm extends Component {
           </label>
         </div>
         <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
+          <input className="bloodbtn bloodbtn-invert red" type="submit" name="submit" value="Log In" />
         </div>
       </form>
     );

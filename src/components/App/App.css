@@ -110,3 +110,63 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+
+
+/* blood filling button css */
+/* Main Button styles*/
+.bloodbtn {
+  /* hue rotate changes the color fo the image. at 0 deg the image is blue, at 125 it is red */
+  filter: hue-rotate(125deg);
+  display: inline-block;
+  padding: 20px 50px;
+  margin: 50px 10px;
+  overflow: hidden;
+  
+  color: #FFF;
+  font-weight: 100;
+  font-size: 1em;
+  text-decoration: none;
+  
+  border: 4px solid #FFF;
+  background-color: rgba(0,0,0,.34);
+  
+  /*Sets the background image to be 'below' the button*/
+  /*Background images are set using the classes below*/
+  background-position: 0 -50%;
+  background-repeat: repeat-x;
+  border-radius: 100px;
+  
+  /* -webkit-box-shadow: inset 4px 4px 0px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    inset 4px 4px 0px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         inset 4px 4px 0px 0px rgba(50, 50, 50, 0.75); */
+  
+  transition: background-position .75s ease;
+
+  cursor: pointer;
+}
+
+/* Style to slow the effect speed */
+.slow {
+  transition: background-position 3s ease;
+}
+
+/* Style for when you want the button on a dark background*/
+.bloodbtn-invert {
+  border: solid 2px #000;
+  color: #000;
+  background-color: rgba(150,150,150,.25);
+  
+  /* -webkit-box-shadow: inset 4px 4px 0px 0px rgba(50, 50, 50, 0.35);
+  -moz-box-shadow:    inset 4px 4px 0px 0px rgba(50, 50, 50, 0.35);
+  box-shadow:         inset 4px 4px 0px 0px rgba(50, 50, 50, 0.35); */
+}
+
+/* Style for when the user hovers the button */
+.bloodbtn:hover {
+  background-position: 100% 50%;
+}
+
+.red{
+  background-image: url('../../assets/nav-bg-fill-blue.png');
+}
