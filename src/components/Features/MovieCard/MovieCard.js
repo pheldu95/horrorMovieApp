@@ -5,40 +5,17 @@ import './MovieCard.css';
 import { Card, Image } from 'semantic-ui-react';
 
 const MovieCard = ({movie}) => {
-  const[showTitle, setShowTitle] = useState(false);
+  // const[showTitle, setShowTitle] = useState(false);
   function showDetails(){
-
+    
   }
   return (
-      <div className='container'>
-        {showTitle?
-          <img 
-            src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} 
-            alt='movie poster' className='moviePoster' 
-            onClick={() => showDetails()}
-            onMouseEnter={() => setShowTitle(true)}
-            onMouseLeave={() => setShowTitle(false)}
-          />
-        :
-          <img
-            src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path}
-            alt='movie poster' className='showTitle'
-            onClick={() => showDetails()}
-            onMouseEnter={() => setShowTitle(true)}
-            onMouseLeave={() => setShowTitle(false)}
-          />
-          // <div
-          //   className = "showTitle"
-          //   onClick={() => showDetails()}
-          //   onMouseEnter={() => setShowTitle(true)}
-          //   onMouseLeave={() => setShowTitle(false)}
-          // style={{ backgroundImage: "url(" + "https://image.tmdb.org/t/p/w1280" + movie.poster_path + ")"}}
-          // >
-            
-          //</div>
-        } 
-      </div>
-    
+    <div className='container'>
+      <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
+      <div className="overlay">{movie.title}</div>
+    </div>
+    // <img className="poster" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
+    //   <div className="after">This is some content</div>
   );
 }
 

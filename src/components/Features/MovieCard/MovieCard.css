@@ -1,27 +1,53 @@
 
 
-.moviePoster{
+/* .moviePoster{
     border-radius: 10px;
     transition: transform .2s;
     width: 250px;
     /* margin-top: 15px; */
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     /* margin: auto; */
-}
-.moviePoster:hover{
+/* } */
+/* .moviePoster:hover{
     cursor: pointer;
     transform: scale(1.08);
+}  */
+
+img {
+    cursor: pointer;
+    border: 2px solid black; 
+    width: 200px;  
 }
 
-.showTitle{
-    border-radius: 10px;
-    transition: transform .2s;
-    width: 250px;
-    /* margin-top: 15px; */
-    margin-bottom: 10px;
-    /* margin: auto; */
+.container {
+    position: relative;    
+    border: 4px solid #FFF;
 }
-.showTitle:hover{
-    cursor: pointer;
-    transform: scale(1.08);
+
+.overlay {
+    position: absolute;
+    bottom: 30px;
+    left: 30px; 
+    padding: 5px;
+    color: #f1f1f1;
+    transition: .5s ease;
+    opacity:0;
+    width: 150px;
+    height: 50px;
+
+    /* trying to do the blood thing */
+    filter: hue-rotate(140deg);
+    background-position: 0 -50%;
+    background-repeat: repeat-x;
+    transition: background-position .75s ease;
+    border-radius: 100px;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.container:hover .overlay {
+    opacity: 1;
+
+    /* blood fill thing */
+    background-position: 100% 50%;
+    background-image: url('../../../assets/nav-bg-fill-blue.png');
 }
