@@ -15,32 +15,33 @@
 
 img {
     cursor: pointer;
-    border: 2px solid black; 
+    /* border: 2px solid black;  */
+    border-radius: 10px;
     width: 200px;  
 }
 
 .container {
     position: relative;    
-    border: 4px solid #FFF;
+    /* border: 4px solid #FFF; */
 }
 
 .overlay {
     position: absolute;
     bottom: 30px;
-    left: 30px; 
+    left: 40px; 
     padding: 5px;
     color: #f1f1f1;
-    transition: .5s ease;
+    /* /* transition: .5s ease; */
     opacity:0;
     width: 150px;
-    height: 50px;
+    height: 100px;
 
     /* trying to do the blood thing */
     filter: hue-rotate(140deg);
-    background-position: 0 -50%;
+    background-position: 0 -200%;
     background-repeat: repeat-x;
-    transition: background-position .75s ease;
-    border-radius: 100px;
+    transition: background-position .99s ease;
+    border-radius: 10px;
 }
 
 /* When you mouse over the container, fade in the overlay title */
@@ -50,4 +51,16 @@ img {
     /* blood fill thing */
     background-position: 100% 50%;
     background-image: url('../../../assets/nav-bg-fill-blue.png');
+}
+
+.text {
+  color: white;
+  /* font-size: 20px; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

@@ -12,7 +12,10 @@ const MovieCard = ({movie}) => {
   return (
     <div className='container'>
       <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
-      <div className="overlay">{movie.title}</div>
+      <div className="overlay">
+        <div class="text">{movie.title}</div>
+       
+      </div>
     </div>
     // <img className="poster" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
     //   <div className="after">This is some content</div>
