@@ -41,7 +41,7 @@ img {
     filter: hue-rotate(140deg);
     background-position: 0 -200%;
     background-repeat: repeat-x;
-    transition: background-position .99s ease;
+    transition: background-position .5s ease;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     
@@ -56,14 +56,21 @@ img {
     background-image: url('../../../assets/nav-bg-fill-blue.png');
 }
 
+.container:hover .text {
+    opacity: 1;
+}
+
 .text {
-  color: white;
-  /* font-size: 20px; */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
+    opacity: 0;
+    transition: opacity .5s ease;
+
+    color: white;
+    /* font-size: 20px; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
