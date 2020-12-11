@@ -13,7 +13,11 @@ const MovieCard = ({movie}) => {
     <div className='container'>
       <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
       <div className="overlay">
-        <div class="text">{movie.title}</div>
+        <div class="text">
+          {movie.title}
+          <br/>
+          {movie.vote_average}/10
+        </div>
        
       </div>
     </div>
