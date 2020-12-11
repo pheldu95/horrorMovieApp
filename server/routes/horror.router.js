@@ -15,6 +15,18 @@ router.get('/popular', (req, res) => {
         })
 })
 
+//get movie details
+router.get('/details/:id', (req, res) => {
+    let id = req.params.id;
+    axios.get(` https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.TMDB_API_KEY}&language=en-US`)
+        .then((response) => {
+            console.log('api response:', response);
+            res.send(response.data)
+        }).catch((error) => {
+            console.log(error);
+
+        })
+})
 module.exports = router;
 
   
