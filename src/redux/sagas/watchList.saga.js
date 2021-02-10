@@ -5,8 +5,13 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* addToWatchList(action) {
     console.log(action.payload);
     try {
+      yield axios({
+          method: 'POST',
+          url: `/api/watchlist`,
+          data: action.payload
+      })
     } catch (error) {
-        console.log('error', error);
+        console.log('error adding packing list items', error);
     }
 }
 

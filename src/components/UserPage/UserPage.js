@@ -17,7 +17,7 @@ class UserPage extends Component {
   getPopHorror = () => {
     axios({
       method: 'GET',
-      url: '/horror/popular'
+      url: '/api/horror/popular'
     }).then((response) => {
       console.log(response);
 

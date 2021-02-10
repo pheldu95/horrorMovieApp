@@ -18,7 +18,7 @@ const MovieDetails = (props) => {
   const getMovieDetails = () => {
     axios({
       method: 'GET',
-      url: `/horror/details/${props.match.params.id}`
+      url: `/api/horror/details/${props.match.params.id}`
     }).then((response) => {
       console.log(response);
       console.log('response going to state:', response);
