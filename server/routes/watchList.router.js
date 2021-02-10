@@ -4,7 +4,25 @@ const axios = require('axios');
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
-    
+    console.log(req.user)
+    if(req.isAuthenticated()){
+        let queryText = `SELECT "movieId"
+                        FROM "watchList" 
+                        WHERE "userId" = ${req.user.id}
+                        ;`;
+        pool.query(queryText).then((result) => {
+            let movieIds = [];
+            for(movie of result.rows){
+                movieIds.push(movie.movieId);
+            }
+            res.send(movieIds);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        });
+    }else{
+        res.sendStatus(403);
+    }
 })
 
 //add a movie to user watch list
