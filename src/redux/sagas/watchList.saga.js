@@ -40,6 +40,7 @@ function* getWatchList(action){
                 console.log(error);
                 alert(error);
             })
+        yield put({type: 'SET_MOVIES', payload: movies});
     }catch(error){
         console.log('error getting watch list. in watchlist saga');
     }

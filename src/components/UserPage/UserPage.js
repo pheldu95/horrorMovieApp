@@ -42,6 +42,13 @@ class UserPage extends Component {
        payload: { userId: this.props.store.user.id } 
     })
   }
+  componentDidUpdate = (prevProps) => {
+    if (this.props.store.movies !== prevProps.store.movies) {
+            this.setState({
+                movies: this.props.store.movies
+            })
+        }
+  }
 
   //changes which tab is the 'active' tab
   handleMenuItemClick = (event, { name }) => {
