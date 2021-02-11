@@ -19,16 +19,14 @@ class UserPage extends Component {
       method: 'GET',
       url: '/api/horror/popular'
     }).then((response) => {
-      console.log(response);
-
-      /*this.props.dispatch({
-        type: 'SET_POP_HORROR',
+      this.props.dispatch({
+        type: 'SET_MOVIES',
         payload: response.data
-      })*/
-      console.log('response going to state:', response);
-      this.setState({
-        movies: response.data
       })
+      // console.log('response going to state:', response);
+      // this.setState({
+      //   movies: response.data
+      // })
 
     }).catch((error) => {
       console.log(error);
@@ -43,7 +41,7 @@ class UserPage extends Component {
     })
   }
   componentDidUpdate = (prevProps) => {
-    if (this.props.store.movies !== prevProps.store.movies) {
+    if (this.props.store.movies !== prevProps.store.movies) { 
             this.setState({
                 movies: this.props.store.movies
             })
@@ -57,11 +55,8 @@ class UserPage extends Component {
     }else if(name === 'watch list'){
       this.getWatchList();
     }
-    
     this.setState({ activeItem: name })
-
   }
-  // this component doesn't do much to start, just renders some user info to the DOM
   render() {
     let movies = this.state.movies;
     const activeItem = this.state.activeItem;
