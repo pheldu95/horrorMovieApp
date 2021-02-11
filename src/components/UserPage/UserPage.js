@@ -74,7 +74,6 @@ class UserPage extends Component {
             onClick={this.handleMenuItemClick}
           />
         </Menu>
-        {JSON.stringify(movies)}
         {activeItem === 'popular'&&
           movies&&
           <MovieList movies={movies}/>
