@@ -37,24 +37,9 @@ class UserPage extends Component {
   }
 
   getWatchList = () =>{
-    axios({
-      method: 'GET',
-      url: '/api/watchList'
-    }).then((response) => {
-      console.log(response);
-
-      /*this.props.dispatch({
-        type: 'SET_POP_HORROR',
-        payload: response.data
-      })*/
-      console.log('response going to state:', response);
-      this.setState({
-        movies: response.data
-      })
-
-    }).catch((error) => {
-      console.log(error);
-      alert(error);
+    this.props.dispatch({ 
+      type: 'GET_WATCH_LIST', 
+       payload: { userId: this.props.store.user.id } 
     })
   }
 

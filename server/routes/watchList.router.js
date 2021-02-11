@@ -10,10 +10,10 @@ router.get('/', (req, res) => {
                         FROM "watch_list" 
                         WHERE "user_id" = ${req.user.id}
                         ;`;
-        pool.query(queryText).then((result) => {
+        pool.query(queryText).then((response) => {
             let movieIds = [];
-            for(movie of result.rows){
-                movieIds.push(movie.movieId);
+            for(movie of response.rows){
+                movieIds.push(movie.movie_id);
             }
             res.send(movieIds);
         }).catch((error) => {
