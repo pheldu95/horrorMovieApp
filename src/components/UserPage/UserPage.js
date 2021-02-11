@@ -36,16 +36,16 @@ class UserPage extends Component {
 
   getWatchList = () =>{
     this.props.dispatch({ 
-      type: 'GET_WATCH_LIST', 
+       type: 'GET_WATCH_LIST', 
        payload: { userId: this.props.store.user.id } 
     })
   }
   componentDidUpdate = (prevProps) => {
     if (this.props.store.movies !== prevProps.store.movies) { 
-            this.setState({
-                movies: this.props.store.movies
-            })
-        }
+        this.setState({
+            movies: this.props.store.movies
+        })
+      }
   }
 
   //changes which tab is the 'active' tab
@@ -74,7 +74,7 @@ class UserPage extends Component {
             onClick={this.handleMenuItemClick}
           />
         </Menu>
-        {/* <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1> */}
+        {JSON.stringify(movies)}
         {activeItem === 'popular'&&
           movies&&
           <MovieList movies={movies}/>

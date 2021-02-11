@@ -9,7 +9,6 @@ const MovieCard = ({movie}) => {
   //in functional components, need useHistory to have accest to the usual this.props.history stuff
   const history = useHistory();
   function showDetails(movieId){
-    console.log(movieId);
     history.push(`/details/${movieId}`);
   }
   return (

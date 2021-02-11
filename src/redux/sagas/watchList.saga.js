@@ -19,27 +19,12 @@ function* getWatchList(action){
     let userId = action.payload.userId
     try{
         let movies = [];
-        yield axios({
-            method: 'GET',
-            url: '/api/watchList'
-            }).then((response) => {
-                //get each movie from the movie db
-                for(let movieId of response.data){
-                    axios({
-                        method: 'GET',
-                        url: `/api/horror/details/${movieId}`
-                    }).then((response) =>{
-                        movies.push(response.data);
-                    }).catch((error) => {
-                        console.log(error);
-                        alert(error);  
-                    })  
-                }
-
-            }).catch((error) => {
-                console.log(error);
-                alert(error);
-            })
+        let movie;
+        const response = yield axios.get(`/api/watchList`);
+        for(let movieId of response.data){
+            movie = yield axios.get(`/api/horror/details/${movieId}`)
+            movies.push(movie.data);
+        }
         yield put({type: 'SET_MOVIES', payload: movies});
     }catch(error){
         console.log('error getting watch list. in watchlist saga');

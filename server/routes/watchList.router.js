@@ -4,7 +4,6 @@ const axios = require('axios');
 const pool = require('../modules/pool');
 
 router.get('/', (req, res) => {
-    console.log(req.user)
     if(req.isAuthenticated()){
         let queryText = `SELECT "movie_id"
                         FROM "watch_list" 
@@ -28,7 +27,6 @@ router.get('/', (req, res) => {
 //add a movie to user watch list
 router.post('/', (req, res) => {
     let item = req.body;
-    console.log(item);
     let queryText = `INSERT INTO "watch_list" ("user_id", "movie_id")
                         VALUES ($1, $2)`;
     pool.query(queryText, [item.userId, item.movieId])

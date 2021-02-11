@@ -14,6 +14,7 @@ const MovieList = ({movies}) => {
           // <Grid.Column >
             <MovieCard className='movieCard' movie={movie} />
           // </Grid.Column>
+          
         )
       })}
     </Grid>
