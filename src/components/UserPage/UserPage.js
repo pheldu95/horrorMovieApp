@@ -9,10 +9,12 @@ import { Menu } from 'semantic-ui-react';
 class UserPage extends Component {
   state ={
     movies: [],
-    activeItem: 'popular'
+    activeItem: 'popular',
+    watchList: []
   }
   componentDidMount(){
     this.getPopHorror();
+    this.getWatchList();
   }
   getPopHorror = () => {
     axios({
@@ -46,6 +48,11 @@ class UserPage extends Component {
             movies: this.props.store.movies
         })
       }
+    if (this.props.store.watchList !== prevProps.store.watchList) {
+      this.setState({
+        watchList: this.props.store.watchList
+      })
+    }
   }
 
   //changes which tab is the 'active' tab
@@ -59,6 +66,7 @@ class UserPage extends Component {
   }
   render() {
     let movies = this.state.movies;
+    let watchList = this.state.watchList;
     const activeItem = this.state.activeItem;
     return (
       <div>
@@ -79,8 +87,8 @@ class UserPage extends Component {
           <MovieList movies={movies}/>
         }
         {activeItem === 'watch list' &&
-          movies &&
-          <MovieList movies={movies} />
+          watchList &&
+          <MovieList movies={watchList} />
         }
         <LogOutButton className="log-in" />
       </div>

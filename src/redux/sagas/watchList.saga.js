@@ -15,8 +15,7 @@ function* addToWatchList(action) {
     }
 }
 
-function* getWatchList(action){
-    let userId = action.payload.userId
+function* getWatchList(){
     try{
         let movies = [];
         let movie;
@@ -25,7 +24,7 @@ function* getWatchList(action){
             movie = yield axios.get(`/api/horror/details/${movieId}`)
             movies.push(movie.data);
         }
-        yield put({type: 'SET_MOVIES', payload: movies});
+        yield put({type: 'SET_WATCHLIST', payload: movies});
     }catch(error){
         console.log('error getting watch list. in watchlist saga');
     }
