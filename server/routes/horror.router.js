@@ -24,6 +24,18 @@ router.get('/details/:id', (req, res) => {
 
         })
 })
+
+//do a search
+router.get('/search', (req, res) => {
+   //send the page number as well as the search query phrase to here
+   let query = req.body.query;
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1&query=${query}&include_adult=false`)
+        .then((response) => {
+            res.send(response.data.results)
+        }).catch((error) => {
+            console.log(error);
+        })
+})
 module.exports = router;
 
   

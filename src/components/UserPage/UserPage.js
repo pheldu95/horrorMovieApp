@@ -5,6 +5,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 import MovieList from '../Features/MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
+import Search from '../Features/Search/Search';
 
 class UserPage extends Component {
   state ={
@@ -70,6 +71,7 @@ class UserPage extends Component {
     const activeItem = this.state.activeItem;
     return (
       <div>
+        <Search/>
         <Menu tabular>
           <Menu.Item
             name='popular'
