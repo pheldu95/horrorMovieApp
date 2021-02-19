@@ -36,6 +36,13 @@ const MovieCard = ({movie}) => {
     });
     setOnWatchList(true);
   }
+  const deleteFromWatchList = () => {
+    dispatch({
+      type: 'DELETE_FROM_WATCH_LIST',
+      payload: { movieId: movie.id, userId: user.id }
+    });
+    setOnWatchList(false);
+  }
 
   return (
     <div className='container' >
@@ -48,7 +55,7 @@ const MovieCard = ({movie}) => {
           <br/>
           {onWatchList 
           
-            ? <Button animated='fade'>
+            ? <Button animated='fade' onClick={() => deleteFromWatchList()}>
                 <Button.Content hidden>Remove</Button.Content>
                 <ButtonContent visible>
                   <Icon name='check circle outline' />

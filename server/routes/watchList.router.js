@@ -37,6 +37,17 @@ router.post('/', (req, res) => {
         res.sendStatus(500);
     })
 });
+
+router.delete('/', (req, res) => {
+    let item = req.body;
+    let queryText = `DELETE FROM "watch_list" WHERE "user_id" = $1 AND "movie_id" = $2`;
+    pool.query(queryText, [item.userId, item.movieId]).then((results) => {
+        res.sendStatus(200);
+    }).catch((err) => {
+        res.sendStatus(500);
+        console.log(err);
+    })
+});
 module.exports = router;
 
   

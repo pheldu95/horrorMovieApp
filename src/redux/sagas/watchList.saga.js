@@ -9,8 +9,10 @@ function* addToWatchList(action) {
             method: 'POST',
             url: `/api/watchlist`,
             data: action.payload
-        })
-        //yield put({ type: 'GET_WATCH_LIST' });
+        });
+        yield put({
+            type: 'GET_WATCH_LIST',
+        });
     } catch (error) {
         console.log('error adding packing list items', error);
     }
@@ -32,8 +34,26 @@ function* getWatchList(){
     
 }
 
+function* deleteFromWatchList(action){
+    try {
+        yield axios({
+            method: 'DELETE',
+            url: `/api/watchList`,
+            data: action.payload
+        });
+        yield put({
+            type: 'GET_WATCH_LIST',
+        });
+    }
+    catch (error) {
+        console.log(error);
+        alert('Unable to delete move from watchlist');
+    };      
+}
+
 function* watchListSaga() {
     yield takeLatest('ADD_TO_WATCH_LIST', addToWatchList);
+    yield takeLatest('DELETE_FROM_WATCH_LIST', deleteFromWatchList);
     yield takeLatest('GET_WATCH_LIST', getWatchList);
 }
 
