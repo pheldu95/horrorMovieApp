@@ -15,7 +15,7 @@ class UserPage extends Component {
   }
   componentDidMount(){
     this.getWatchList();
-    this.getPopHorror();
+    //this.getPopHorror();
   }
   getPopHorror = () => {
     axios({
@@ -53,6 +53,8 @@ class UserPage extends Component {
       this.setState({
         watchList: this.props.store.watchList
       })
+      //we get the popular horror after we have the wathclist in the store. that way we can check if movies are on the watchlist
+      this.getPopHorror();
     }
   }
 

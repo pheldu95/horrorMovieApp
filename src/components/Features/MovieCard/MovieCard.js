@@ -19,6 +19,7 @@ const MovieCard = ({movie}) => {
   const watchList = useSelector((state) => state.watchList)
   function watchListCheck(){
     let response = watchListChecker(movie.id, watchList)
+    setOnWatchList(response);   
   }
   function showDetails(movieId) {
     history.push(`/details/${movieId}`);

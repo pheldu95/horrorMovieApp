@@ -1,7 +1,10 @@
 export function watchListChecker (movieId, watchList )  {
-    if(movieId){
-        return (
-            true
-        );
+    let check = false;
+
+    for(let movie of watchList){
+        if(movie.id == movieId){
+            check = true;
+        }
     }
+    return(check);
 }
