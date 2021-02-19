@@ -13,13 +13,15 @@ const MovieCard = ({movie}) => {
   }, [])
   //in functional components, need useHistory to have accest to the usual this.props.history stuff
   const history = useHistory();
-  const [onWatchList, setOnWatchList] = useState();
+  const [onWatchList, setOnWatchList] = useState(false);
   
   //use hook to get watchList from store
   const watchList = useSelector((state) => state.watchList)
   function watchListCheck(){
     let response = watchListChecker(movie.id, watchList)
     setOnWatchList(response);   
+    console.log(response);
+    
   }
   function showDetails(movieId) {
     history.push(`/details/${movieId}`);
@@ -33,12 +35,22 @@ const MovieCard = ({movie}) => {
           <br/>
           {movie.vote_average}/10
           <br/>
-          <Button animated='fade'>
-            <Button.Content hidden>Add</Button.Content>
-            <ButtonContent visible>
-              <Icon name= 'eye'/>
-            </ButtonContent>
-          </Button>
+          {onWatchList 
+          
+            ? <Button animated='fade'>
+                <Button.Content hidden>Remove</Button.Content>
+                <ButtonContent visible>
+                <Icon name='check circle outline' />
+                </ButtonContent>
+              </Button>
+            
+            : <Button animated='fade'>
+                <Button.Content hidden>Add</Button.Content>
+                <ButtonContent visible>
+                  <Icon name= 'eye'/>
+                </ButtonContent>
+              </Button>
+          }
         </div>
        
       </div>
