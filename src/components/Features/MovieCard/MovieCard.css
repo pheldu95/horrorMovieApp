@@ -27,7 +27,7 @@ img {
 }
 
 .overlay {
-    cursor: pointer;
+    /* cursor: pointer; */
     position: absolute;
     bottom: 20px;
     /* left: 40px;  */

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch} from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './MovieCard.css';
 import { useHistory } from "react-router-dom";
@@ -15,20 +15,31 @@ const MovieCard = ({movie}) => {
   const history = useHistory();
   const [onWatchList, setOnWatchList] = useState(false);
   
-  //use hook to get watchList from store
+  //use hook to get watchList and user from store
   const watchList = useSelector((state) => state.watchList)
+  const user = useSelector((state) => state.user);
+  //get dispatch functionality
+  const dispatch = useDispatch()
+
   function watchListCheck(){
     let response = watchListChecker(movie.id, watchList)
     setOnWatchList(response);   
-    console.log(response);
-    
   }
   function showDetails(movieId) {
     history.push(`/details/${movieId}`);
   }
+
+  const addToWatchList = () => {
+    dispatch({
+      type: 'ADD_TO_WATCH_LIST',
+      payload: { movieId: movie.id, userId: user.id }
+    });
+    setOnWatchList(true);
+  }
+
   return (
-    <div className='container' onClick={() => showDetails(movie.id)}>
-      <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} />
+    <div className='container' >
+      <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} onClick={() => showDetails(movie.id)}/>
       <div className="overlay">
         <div className="text">
           {movie.title}
@@ -40,11 +51,11 @@ const MovieCard = ({movie}) => {
             ? <Button animated='fade'>
                 <Button.Content hidden>Remove</Button.Content>
                 <ButtonContent visible>
-                <Icon name='check circle outline' />
+                  <Icon name='check circle outline' />
                 </ButtonContent>
               </Button>
             
-            : <Button animated='fade'>
+            : <Button animated='fade' onClick={() => addToWatchList()}>
                 <Button.Content hidden>Add</Button.Content>
                 <ButtonContent visible>
                   <Icon name= 'eye'/>

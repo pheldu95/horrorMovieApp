@@ -10,6 +10,7 @@ function* addToWatchList(action) {
             url: `/api/watchlist`,
             data: action.payload
         })
+        //yield put({ type: 'GET_WATCH_LIST' });
     } catch (error) {
         console.log('error adding packing list items', error);
     }
