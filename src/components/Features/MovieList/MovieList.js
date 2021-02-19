@@ -5,8 +5,6 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import MovieCard from '../MovieCard/MovieCard';
 
 const MovieList = ({movies}) => {
-  console.log(movies);
-  
   return (
     <Grid centered className='movieGrid'>
       {movies.map((movie) => {

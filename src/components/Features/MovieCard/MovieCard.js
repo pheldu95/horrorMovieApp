@@ -1,26 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './MovieCard.css';
 import { useHistory } from "react-router-dom";
 import { Button, ButtonContent, Icon } from 'semantic-ui-react';
+import {watchListChecker} from '../../App/Common/watchListChecker';
 
 const MovieCard = ({movie}) => {
   useEffect(() => {
-    watchListChecker();
+    watchListCheck();
     //add the things we are using to the dependencies
   }, [])
   //in functional components, need useHistory to have accest to the usual this.props.history stuff
   const history = useHistory();
-  const [watchListCheck, setWatchListCheck] = useState();
+  const [onWatchList, setOnWatchList] = useState();
   
-  function watchListChecker(){
-    //console.log(props);
-    
-    // /*for(let id in props.store.watchList){
-    //   console.log(id);
-      
-    // }*/
+  //use hook to get watchList from store
+  const watchList = useSelector((state) => state.watchList)
+  function watchListCheck(){
+    let response = watchListChecker(movie.id, watchList)
   }
   function showDetails(movieId) {
     history.push(`/details/${movieId}`);

@@ -14,8 +14,8 @@ class UserPage extends Component {
     watchList: []
   }
   componentDidMount(){
-    this.getPopHorror();
     this.getWatchList();
+    this.getPopHorror();
   }
   getPopHorror = () => {
     axios({
