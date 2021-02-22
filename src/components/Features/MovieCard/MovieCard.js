@@ -7,19 +7,22 @@ import { Button, ButtonContent, Icon } from 'semantic-ui-react';
 import {watchListChecker} from '../../App/Common/watchListChecker';
 
 const MovieCard = ({movie}) => {
-  useEffect(() => {
-    watchListCheck();
-    //add the things we are using to the dependencies
-  }, [])
   //in functional components, need useHistory to have accest to the usual this.props.history stuff
   const history = useHistory();
   const [onWatchList, setOnWatchList] = useState(false);
-  
   //use hook to get watchList and user from store
   const watchList = useSelector((state) => state.watchList)
   const user = useSelector((state) => state.user);
   //get dispatch functionality
   const dispatch = useDispatch()
+
+  //adding [watchList] at the end. makes this component act like combo
+  //of componentDidMount and componentDidUpdate.
+  //because added [watchList], the component will run useEffect again if
+  //the watchlist changes.
+  useEffect(() => {
+    watchListCheck();
+  }, [watchList]);
 
   function watchListCheck(){
     let response = watchListChecker(movie.id, watchList)
