@@ -6,21 +6,23 @@ import axios from 'axios';
 import MovieList from '../Features/MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
 import Search from '../Features/Search/Search';
+import { Button } from 'semantic-ui-react';
 
 class UserPage extends Component {
   state ={
     movies: [],
     activeItem: 'popular',
-    watchList: []
+    watchList: [],
+    page: 0
   }
   componentDidMount(){
     this.getWatchList();
     //this.getPopHorror();
   }
-  getPopHorror = () => {
+  getPopHorror = (page) => {
     axios({
       method: 'GET',
-      url: '/api/horror/popular'
+      url: `/api/horror/popular/${page}`
     }).then((response) => {
       this.props.dispatch({
         type: 'SET_MOVIES',
@@ -34,6 +36,9 @@ class UserPage extends Component {
     }).catch((error) => {
       console.log(error);
       alert(error);
+    })
+    this.setState({
+      page: page+1
     })
   }
 
@@ -54,7 +59,7 @@ class UserPage extends Component {
         watchList: this.props.store.watchList
       })
       //we get the popular horror after we have the wathclist in the store. that way we can check if movies are on the watchlist
-      this.getPopHorror();
+      this.getPopHorror(1);
     }
   }
 
@@ -95,6 +100,7 @@ class UserPage extends Component {
           <MovieList movies={watchList} />
         }
         <LogOutButton className="log-in" />
+        <Button onClick={() => this.getPopHorror(this.state.page + 1)}>Next</Button>
       </div>
     );
   }
