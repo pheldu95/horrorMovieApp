@@ -14,7 +14,7 @@ const MovieCard = ({movie}) => {
   const watchList = useSelector((state) => state.watchList)
   const user = useSelector((state) => state.user);
   //get dispatch functionality
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   //adding [watchList] at the end. makes this component act like combo
   //of componentDidMount and componentDidUpdate.

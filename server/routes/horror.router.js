@@ -27,12 +27,35 @@ router.get('/details/:id', (req, res) => {
 })
 
 //do a search
-router.get('/search', (req, res) => {
+router.get('/search/:query', (req, res) => {
    //send the page number as well as the search query phrase to here
-   let query = req.body.query;
-    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1&query=${query}&include_adult=false`)
+   let query = req.params.query;
+   let pages = 0;
+   let horrorMovies = [];
+    axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&query=${query}&include_adult=false`)
         .then((response) => {
-            res.send(response.data.results)
+            //console.log(response);
+            pages = response.data.total_pages;
+            for (let i = 0; i < pages; i++) {
+                axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&query=${query}&page=${i}&include_adult=false`)
+                    .then((response) => {
+                        for (let movie of response.data.results) {
+                            for(let j = 0; j < movie.genre_ids.length; j++){
+                                if (movie.genre_ids[j] === 27){
+                                    console.log(movie.title);
+                                    
+                                    horrorMovies.push(movie);
+                                }
+                            }
+                        }
+                        res.send(200);
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
+            console.log(horrorMovies);
+            
+            res.send(horrorMovies);
         }).catch((error) => {
             console.log(error);
         })

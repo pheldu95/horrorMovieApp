@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './Search.css';
-import { useHistory } from "react-router-dom";
+import axios from 'axios';
 import { Button, Input, Icon } from 'semantic-ui-react';
 
 const Search = () => {
-    
+    const [query, setQuery] = useState();
+    const dispatch = useDispatch();
+    const submitQuery = () => {
+        axios({
+            method: 'GET',
+            url: `/api/horror/search/${query}`,
+        }).then((response) => {
+            dispatch({
+                type: 'SET_MOVIES',
+                payload: response.data
+            });
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
+    }
     return (
-        <div >
-            <Input focus placeholder='Search...' />
-            <Button icon>
+        
+        <div>
+            <h1>{query}</h1>
+            <Input focus placeholder='Search...' onChange={(event) => setQuery(event.target.value)}/>
+            <Button icon onClick = {() => submitQuery()}>
                 <Icon name='search' />
             </Button>
         </div>
