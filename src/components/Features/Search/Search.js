@@ -9,17 +9,9 @@ const Search = () => {
     const [query, setQuery] = useState();
     const dispatch = useDispatch();
     const submitQuery = () => {
-        axios({
-            method: 'GET',
-            url: `/api/horror/search/${query}`,
-        }).then((response) => {
-            dispatch({
-                type: 'SET_MOVIES',
-                payload: response.data
-            });
-        }).catch((error) => {
-            console.log(error);
-            alert(error);
+        dispatch({
+            type: 'SEARCH',
+            payload: query
         })
     }
     return (
