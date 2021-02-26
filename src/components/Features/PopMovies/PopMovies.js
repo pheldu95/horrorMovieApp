@@ -42,8 +42,6 @@ class MoviesView extends Component {
             payload: { userId: this.props.store.user.id }
         })
         this.getPopHorror(Number(this.state.page));
-        console.log(this.state.page);
-        
     }
     componentDidUpdate = (prevProps) => {
         if (this.props.store.movies !== prevProps.store.movies) {
@@ -76,6 +74,11 @@ class MoviesView extends Component {
             page: next
         })
         this.props.history.push(`/popular/${next}`);
+        //do i need to get watch list again?
+        this.props.dispatch({
+            type: 'GET_WATCH_LIST',
+            payload: { userId: this.props.store.user.id }
+        })
         this.getPopHorror(next);
     }
     render() {

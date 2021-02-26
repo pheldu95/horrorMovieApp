@@ -22,7 +22,7 @@ const MovieCard = ({movie}) => {
   //the watchlist changes.
   useEffect(() => {
     watchListCheck();
-  }, [watchList]);
+  }, [watchList, watchListCheck]);
 
   function watchListCheck(){
     let response = watchListChecker(movie.id, watchList)
