@@ -17,22 +17,19 @@ class MoviesView extends Component {
     }
     componentDidMount() {
         this.getWatchList();
-        //this.getPopHorror();
+        this.setState({
+            page: this.props.match.params.page
+        });
     }
     getPopHorror = (page) => {
         axios({
             method: 'GET',
-            url: `/api/horror/popular/${this.props.match.params.page}`
+            url: `/api/horror/popular/${page}`
         }).then((response) => {
             this.props.dispatch({
                 type: 'SET_MOVIES',
                 payload: response.data
             })
-            // console.log('response going to state:', response);
-            // this.setState({
-            //   movies: response.data
-            // })
-
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -44,6 +41,9 @@ class MoviesView extends Component {
             type: 'GET_WATCH_LIST',
             payload: { userId: this.props.store.user.id }
         })
+        this.getPopHorror(Number(this.state.page));
+        console.log(this.state.page);
+        
     }
     componentDidUpdate = (prevProps) => {
         if (this.props.store.movies !== prevProps.store.movies) {
@@ -56,7 +56,7 @@ class MoviesView extends Component {
                 watchList: this.props.store.watchList
             })
             //we get the popular horror after we have the wathclist in the store. that way we can check if movies are on the watchlist
-            this.getPopHorror(1);
+            //this.getPopHorror(this.state.page);
         }
     }
 
@@ -71,8 +71,12 @@ class MoviesView extends Component {
     }
 
     nextPage = () =>{
-        let next = Number(this.state.page) + 1;
+        let next = Number(this.props.match.params.page) + 1;
+        this.setState({
+            page: next
+        })
         this.props.history.push(`/popular/${next}`);
+        this.getPopHorror(next);
     }
     render() {
         let movies = this.state.movies;
