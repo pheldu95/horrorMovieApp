@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import MovieDetails from '../Features/MovieDetails/MoveDetails';
 
 import './App.css';
-import MoviesView from '../Features/MoviesView/MoviesView';
+import MoviesView from '../Features/PopMovies/PopMovies';
 
 class App extends Component {
   componentDidMount() {

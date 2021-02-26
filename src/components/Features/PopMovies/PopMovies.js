@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
-import MovieList from '..//MovieList/MovieList';
+import MovieList from '../MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
 import Search from '../Search/Search';
 import { Button } from 'semantic-ui-react';
@@ -13,7 +13,7 @@ class MoviesView extends Component {
         movies: [],
         activeItem: 'popular',
         watchList: [],
-        page: 0
+        page: this.props.match.params.page
     }
     componentDidMount() {
         this.getWatchList();
@@ -22,7 +22,7 @@ class MoviesView extends Component {
     getPopHorror = (page) => {
         axios({
             method: 'GET',
-            url: `/api/horror/popular/${page}`
+            url: `/api/horror/popular/${this.props.match.params.page}`
         }).then((response) => {
             this.props.dispatch({
                 type: 'SET_MOVIES',
@@ -36,9 +36,6 @@ class MoviesView extends Component {
         }).catch((error) => {
             console.log(error);
             alert(error);
-        })
-        this.setState({
-            page: page + 1
         })
     }
 
@@ -72,6 +69,11 @@ class MoviesView extends Component {
         }
         this.setState({ activeItem: name })
     }
+
+    nextPage = () =>{
+        let next = Number(this.state.page) + 1;
+        this.props.history.push(`/popular/${next}`);
+    }
     render() {
         let movies = this.state.movies;
         let watchList = this.state.watchList;
@@ -100,7 +102,7 @@ class MoviesView extends Component {
                     <MovieList movies={watchList} />
                 }
                 <LogOutButton className="log-in" />
-                <Button onClick={() => this.getPopHorror(this.state.page + 1)}>Next</Button>
+                <Button onClick={() => this.nextPage()}>Next</Button>
             </div>
         );
     }
