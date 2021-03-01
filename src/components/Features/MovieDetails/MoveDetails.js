@@ -64,6 +64,8 @@ const MovieDetails = (props) => {
                 {movieDetails.overview}
               </p>
               <p>{JSON.stringify(movieDetails)}</p>
+          <p>{JSON.stringify(movieDetails)}</p>
+          <p>{JSON.stringify(movieDetails)}</p>
             </Container>
           </div>
         }
