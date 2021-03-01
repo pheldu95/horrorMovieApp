@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { useHistory } from "react-router-dom";
 import axios from 'axios';
-import { Button, Container, Divider } from 'semantic-ui-react'
+import { Button, Container, Divider } from 'semantic-ui-react';
+import './MovieDetails.css';
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
@@ -40,7 +41,8 @@ const MovieDetails = (props) => {
   return (
       <div className = 'standardContainer'>
         {movieDetails&&
-          <>
+          <div class='detailsContainer' style={{ backgroundImage: `url(require(https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/${movieDetails.backdrop_path}))` }}>
+            <img src = {`https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/${movieDetails.backdrop_path}`}/>
             <Container textAlign='left'>
               <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
               <Button onClick={() => addToWatchList()}>Add to Watch List</Button>
@@ -54,7 +56,7 @@ const MovieDetails = (props) => {
               </p>
               <p>{JSON.stringify(movieDetails)}</p>
             </Container>
-          </>
+          </div>
         }
       </div>
   );
