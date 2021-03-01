@@ -39,11 +39,13 @@ const MovieDetails = (props) => {
     })
   }
 
-  // window.onscroll = function () {
-  //   if (window.pageYOffset === 7) {
-  //     alert('I AM AT THE TOP');
-  //   }
-  // };
+  window.onscroll = function () {
+    console.log(window.pageYOffset);
+    //maybe use this to change the opacity????
+    // if (window.pageYOffset === 7) {
+    //   alert('I AM AT THE TOP');
+    // }
+  };
 
   return (
       <div className = 'standardContainer'>
