@@ -41,8 +41,7 @@ const MovieDetails = (props) => {
   return (
       <div className = 'standardContainer'>
         {movieDetails&&
-          <div class='detailsContainer' style={{ backgroundImage: `url(require(https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/${movieDetails.backdrop_path}))` }}>
-            <img src = {`https://www.themoviedb.org/t/p/w300_and_h450_bestv2_filter(blur)/${movieDetails.backdrop_path}`}/>
+          <div className='detailsContainer' style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`}}>
             <Container textAlign='left'>
               <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
               <Button onClick={() => addToWatchList()}>Add to Watch List</Button>

@@ -1,3 +1,9 @@
 .detailsContainer{
-    
+    /* height: auto; */
+    width: 70%;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: top;
+    /* background-size: cover; */
+    /* box-shadow: 25px 25px 50px 0 white inset, -25px -25px 50px 0 white inset;  */
 }
