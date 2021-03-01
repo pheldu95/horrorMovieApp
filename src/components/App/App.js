@@ -22,6 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import MovieDetails from '../Features/MovieDetails/MoveDetails';
 
 import './App.css';
+import MoviesView from '../Features/PopMovies/PopMovies';
 
 class App extends Component {
   componentDidMount() {
@@ -92,6 +93,15 @@ class App extends Component {
               path="/home"
               component={LandingPage}
               authRedirect="/user"
+            />
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/popular/:page"
+              component={MoviesView}
             />
 
             <ProtectedRoute

@@ -72,6 +72,10 @@ class UserPage extends Component {
     }
     this.setState({ activeItem: name })
   }
+
+  nextPage = () =>{
+    this.props.history.push('/popular/2');
+  }
   render() {
     let movies = this.state.movies;
     let watchList = this.state.watchList;
@@ -100,7 +104,7 @@ class UserPage extends Component {
           <MovieList movies={watchList} />
         }
         <LogOutButton className="log-in" />
-        <Button onClick={() => this.getPopHorror(this.state.page + 1)}>Next</Button>
+        <Button onClick={() => this.nextPage()}>Next</Button>
       </div>
     );
   }
