@@ -38,15 +38,25 @@ const MovieDetails = (props) => {
       payload: { movieId: movieDetails.id, userId: props.store.user.id } 
     })
   }
+
+  // window.onscroll = function () {
+  //   if (window.pageYOffset === 7) {
+  //     alert('I AM AT THE TOP');
+  //   }
+  // };
+
   return (
       <div className = 'standardContainer'>
         {movieDetails&&
-          <div className='detailsContainer' style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`}}>
+          <div className='detailsContainer'>
+            <div className='background'>
+              <img style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"` }} />
+            </div>
             <Container textAlign='left'>
               <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
               <Button onClick={() => addToWatchList()}>Add to Watch List</Button>
             </Container>
-            <Container textAlign='center'>Center Aligned</Container>
+            <Container textAlign='center'>{movieDetails.title}</Container>
             <Container textAlign='justified'>
               <b>{movieDetails.tagline}</b>
               <Divider />

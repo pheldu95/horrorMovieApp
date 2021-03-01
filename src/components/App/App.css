@@ -6,8 +6,9 @@ body,
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f8f8f8;
   margin: 0px;
-  background-color: #8a8c84;
+  background-color: #14181d;
 }
 
 img {
