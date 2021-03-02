@@ -40,6 +40,7 @@ const MovieDetails = (props) => {
     })
   }
 
+  //used to change the opacity of the background photo as the user scrolls down
   window.onscroll = function () {
     let opacityCoefficient = 80 / window.pageYOffset;
     if (opacityCoefficient < .2){
@@ -67,8 +68,8 @@ const MovieDetails = (props) => {
                 {movieDetails.overview}
               </p>
               <p>{JSON.stringify(movieDetails)}</p>
-          <p>{JSON.stringify(movieDetails)}</p>
-          <p>{JSON.stringify(movieDetails)}</p>
+              <p>{JSON.stringify(movieDetails)}</p>
+              <p>{JSON.stringify(movieDetails)}</p>
             </Container>
           </div>
         }
