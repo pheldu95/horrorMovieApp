@@ -11,6 +11,7 @@ const MovieDetails = (props) => {
   const history = useHistory();
 
   const [movieDetails, setMovieDetails] = useState();
+  const [opac, setOpac] = useState();
 
   useEffect(() => {
     getMovieDetails();
@@ -40,11 +41,11 @@ const MovieDetails = (props) => {
   }
 
   window.onscroll = function () {
-    console.log(window.pageYOffset);
-    //maybe use this to change the opacity????
-    // if (window.pageYOffset === 7) {
-    //   alert('I AM AT THE TOP');
-    // }
+    let opacityCoefficient = 80 / window.pageYOffset;
+    if (opacityCoefficient < .2){
+      opacityCoefficient = 0;
+    }
+    setOpac(opacityCoefficient);
   };
 
   return (
@@ -52,7 +53,7 @@ const MovieDetails = (props) => {
         {movieDetails&&
           <div className='detailsContainer'>
             <div className='background'>
-              <img style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"` }} />
+              <img style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`, opacity: opac }} />
             </div>
             <Container textAlign='left'>
               <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
