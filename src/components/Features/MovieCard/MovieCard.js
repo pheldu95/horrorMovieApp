@@ -49,7 +49,7 @@ const MovieCard = ({movie}) => {
 
   return (
     <div className='container' >
-      <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} onClick={() => showDetails(movie.id)}/>
+      <img className="cardImg" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} onClick={() => showDetails(movie.id)}/>
       <div className="overlay">
         <div className="text">
           {movie.title}

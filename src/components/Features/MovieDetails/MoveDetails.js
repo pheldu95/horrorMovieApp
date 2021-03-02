@@ -33,7 +33,6 @@ const MovieDetails = (props) => {
   }
   
   const addToWatchList = () => {
-    console.log(props);
     props.dispatch({ 
       type: 'ADD_TO_WATCH_LIST', 
       payload: { movieId: movieDetails.id, userId: props.store.user.id } 
