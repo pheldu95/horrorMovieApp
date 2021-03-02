@@ -23,6 +23,7 @@ import MovieDetails from '../Features/MovieDetails/MovieDetails';
 
 import './App.css';
 import MoviesView from '../Features/PopMovies/PopMovies';
+import SearchResults from '../Features/Search/SearchResults';
 
 class App extends Component {
   componentDidMount() {
@@ -111,6 +112,15 @@ class App extends Component {
               exact
               path="/details/:id"
               component={MovieDetails}
+            />
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/search/:query"
+              component={SearchResults}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

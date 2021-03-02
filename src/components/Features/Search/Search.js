@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './Search.css';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import { Button, Input, Icon } from 'semantic-ui-react';
 
 const Search = () => {
+    const history = useHistory();
     const [query, setQuery] = useState();
-    const dispatch = useDispatch();
+    
     const submitQuery = () => {
-        dispatch({
-            type: 'SEARCH',
-            payload: query
-        })
+        let uriEncoded = encodeURI(query);
+        history.push(`/search/${uriEncoded}`);
     }
     return (
         
