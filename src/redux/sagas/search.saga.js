@@ -6,6 +6,8 @@ function* search(action){
     try{
         const response = yield axios.get(`/api/horror/search/${query}/1`);
         let pages = response.data.total_pages;
+        console.log(pages);
+        
         yield put({ type: 'SET_MOVIES', payload: response.data.results });
         /*axios({
             method: 'GET',

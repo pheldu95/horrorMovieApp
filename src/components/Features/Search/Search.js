@@ -3,7 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './Search.css';
 import { useHistory, Link } from 'react-router-dom';
-import { Button, Input, Icon } from 'semantic-ui-react';
+import { Button, Input, Icon, Form } from 'semantic-ui-react';
 
 const Search = () => {
     const history = useHistory();
@@ -20,10 +20,20 @@ const Search = () => {
         
         <div>
             <h1>{query}</h1>
-            <Input focus placeholder='Search...' onChange={(event) => setQuery(event.target.value)}/>
-            <Button icon onClick = {() => submitQuery()}>
-                <Icon name='search' />
-            </Button>
+            <Form onSubmit={() => submitQuery()}>
+                <Form.Group>
+                    <Form.Input 
+                        inverted 
+                        icon={{ name: 'search', circular: true, link: true, onClick: () => submitQuery() }} 
+                        focus 
+                        placeholder='Search...' 
+                        onChange={(event) => setQuery(event.target.value)}
+                    />
+                    {/* <Form.Button icon onClick = {() => submitQuery()}>
+                        <Icon name='search' />
+                    </Form.Button> */}
+                </Form.Group>
+            </Form>
         </div>
     );
 }
