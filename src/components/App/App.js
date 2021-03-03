@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import MovieDetails from '../Features/MovieDetails/MovieDetails';
 
 import './App.css';
-import MoviesView from '../Features/PopMovies/PopMovies';
+import PopMovies from '../Features/PopMovies/PopMovies';
 import SearchResults from '../Features/Search/SearchResults';
 
 class App extends Component {
@@ -102,7 +102,7 @@ class App extends Component {
               // - else shows LandingPage at "/home"
               exact
               path="/popular/:page"
-              component={MoviesView}
+              component={PopMovies}
             />
 
             <ProtectedRoute
@@ -119,7 +119,7 @@ class App extends Component {
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
-              path="/search/:query"
+              path="/search/:query/:page"
               component={SearchResults}
             />
 

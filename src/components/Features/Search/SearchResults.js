@@ -8,15 +8,16 @@ import Search from './Search';
 
 const SearchResults = (props) => {
     const dispatch = useDispatch();
+    const query = props.match.params.query;
     // const [movies, setMovies] = useState();
     const movies = useSelector((state) => state.movies)
     useEffect(() => {
-        let query = props.match.params.query;
+        // let query = props.match.params.query;
         dispatch({
             type: 'SEARCH',
             payload: query
         })
-    }, [])
+    }, [query])
     
     return (
         <>

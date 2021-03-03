@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './Search.css';
-import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { Button, Input, Icon } from 'semantic-ui-react';
 
 const Search = () => {
@@ -12,7 +11,10 @@ const Search = () => {
     
     const submitQuery = () => {
         let uriEncoded = encodeURI(query);
-        history.push(`/search/${uriEncoded}`);
+        console.log(history);
+        history.push({
+           pathname: `/search/${uriEncoded}/1`
+        });
     }
     return (
         
