@@ -52,7 +52,7 @@ img {
 .container:hover .overlay {
     opacity: 1;
     /* blood fill thing */
-    background-position: 200% 50%;
+    background-position: 100% 50%;
     background-image: url('../../../assets/nav-bg-fill-blue.png');
 }
 
