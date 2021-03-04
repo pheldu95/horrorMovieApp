@@ -56,8 +56,10 @@ const MovieDetails = (props) => {
               <img style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`, opacity: opac }} />
             </div>
             <Container textAlign='left'>
-              <img className="img" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
-              <Button onClick={() => addToWatchList()}>Add to Watch List</Button>
+              <img className="poster" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
+              <br/>
+              <br/>
+              <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
             </Container>
             <Container textAlign='center'>{movieDetails.title}</Container>
             <Container textAlign='justified'>
@@ -66,9 +68,6 @@ const MovieDetails = (props) => {
               <p>
                 {movieDetails.overview}
               </p>
-              <p>{JSON.stringify(movieDetails)}</p>
-              <p>{JSON.stringify(movieDetails)}</p>
-              <p>{JSON.stringify(movieDetails)}</p>
             </Container>
           </div>
         }

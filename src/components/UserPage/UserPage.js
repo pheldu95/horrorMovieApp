@@ -83,7 +83,7 @@ class UserPage extends Component {
     return (
       <div>
         <Search/>
-        <Menu tabular>
+        <Menu inverted pointing secondary>
           <Menu.Item
             name='popular'
             active={activeItem === 'popular'}
