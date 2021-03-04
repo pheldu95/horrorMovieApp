@@ -103,7 +103,7 @@ class UserPage extends Component {
           watchList &&
           <MovieList movies={watchList} />
         }
-        <LogOutButton className="log-in" />
+        {/* <LogOutButton className="log-in" /> */}
         <Button onClick={() => this.nextPage()}>Next</Button>
       </div>
     );

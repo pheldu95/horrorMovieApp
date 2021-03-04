@@ -92,7 +92,7 @@ const MovieDetails = (props) => {
               <u>Subgenres:</u> {
                   movieDetails.genres.length > 1
                     ?movieDetails.genres.map((genre)=>{
-                      if(genre.id != 27){
+                      if(genre.id !== 27){
                         return <div>
                           {genre.name}
                           <br/>

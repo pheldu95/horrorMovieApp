@@ -88,16 +88,18 @@ class MoviesView extends Component {
 
     lastPage = () =>{
         let back = Number(this.props.match.params.page) - 1;
-        this.setState({
-            page: back
-        })
-        this.props.history.push(`/popular/${back}`);
-        //do i need to get watch list again?
-        this.props.dispatch({
-            type: 'GET_WATCH_LIST',
-            payload: { userId: this.props.store.user.id }
-        })
-        this.getPopHorror(back);
+        if(back > 0){
+            this.setState({
+                page: back
+            })
+            this.props.history.push(`/popular/${back}`);
+            //do i need to get watch list again?
+            this.props.dispatch({
+                type: 'GET_WATCH_LIST',
+                payload: { userId: this.props.store.user.id }
+            })
+            this.getPopHorror(back);
+        }
     }
 
     render(
@@ -112,7 +114,7 @@ class MoviesView extends Component {
                 <br/>
                 <br/>
                 <Search />
-                <Menu tabular>
+                <Menu inverted pointing secondary>
                     <Menu.Item
                         name='popular'
                         active={activeItem === 'popular'}
@@ -132,7 +134,7 @@ class MoviesView extends Component {
                     watchList &&
                     <MovieList movies={watchList} />
                 }
-                <LogOutButton className="log-in" />
+                {/* <LogOutButton className="log-in" /> */}
                 <Button onClick={() => this.lastPage()}>Back</Button>
                 <Button onClick={() => this.nextPage()}>Next</Button>
             </div>
