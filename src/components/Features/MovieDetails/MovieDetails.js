@@ -68,12 +68,12 @@ const MovieDetails = (props) => {
               <br/>
               <br/>
               <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
-              <Statistic.Group>
-                <Statistic inverted>
-                  <Statistic.Value>{movieDetails.vote_average}</Statistic.Value>
+              <Statistic.Group size='mini'>
+                <Statistic inverted >
+                  <Statistic.Value>{movieDetails.vote_average}/10</Statistic.Value>
                   <Statistic.Label>Rating</Statistic.Label>
                 </Statistic>
-                <Statistic inverted>
+                <Statistic inverted >
                   <Statistic.Value>{movieDetails.vote_count}</Statistic.Value>
                   <Statistic.Label>Votes</Statistic.Label>
                 </Statistic>
@@ -81,7 +81,7 @@ const MovieDetails = (props) => {
               
             </Container>
             <Container textAlign='center'>
-            <h1>{movieDetails.title}<h4>{releaseYear}</h4></h1>
+            <h1 style={{ fontFamily: 'TiemposHeadlineWeb-Bold' }}>{movieDetails.title}<h4>{releaseYear}</h4></h1>
             </Container>
             <Container textAlign='justified'>
               <b>{movieDetails.tagline}</b>
