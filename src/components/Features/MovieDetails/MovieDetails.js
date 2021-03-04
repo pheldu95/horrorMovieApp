@@ -2,12 +2,13 @@ import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
-import { Button, Container, Divider } from 'semantic-ui-react';
+import { Button, Container, Divider, Statistic } from 'semantic-ui-react';
 import './MovieDetails.css';
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
+  const [releaseYear, setReleaseYear]  = useState();
   const [opac, setOpac] = useState();
 
   const getMovieDetails = () => {
@@ -16,6 +17,8 @@ const MovieDetails = (props) => {
       url: `/api/horror/details/${props.match.params.id}`
     }).then((response) => {
       setMovieDetails(response.data);
+      let year = response.data.release_date.substring(0, 4);
+      setReleaseYear(year);
     }).catch((error) => {
       console.log(error);
       alert(error);
@@ -44,6 +47,7 @@ const MovieDetails = (props) => {
     setOpac(opacityCoefficient);
   };
 
+  
   return (
       <div className = 'standardContainer'>
         {movieDetails&&
@@ -64,16 +68,27 @@ const MovieDetails = (props) => {
               <br/>
               <br/>
               <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
+              <Statistic.Group>
+                <Statistic inverted>
+                  <Statistic.Value>{movieDetails.vote_average}</Statistic.Value>
+                  <Statistic.Label>Rating</Statistic.Label>
+                </Statistic>
+                <Statistic inverted>
+                  <Statistic.Value>{movieDetails.vote_count}</Statistic.Value>
+                  <Statistic.Label>Votes</Statistic.Label>
+                </Statistic>
+              </Statistic.Group>
+              
             </Container>
-            <Container textAlign='center'>{movieDetails.title}</Container>
+            <Container textAlign='center'>
+            <h1>{movieDetails.title}<h4>{releaseYear}</h4></h1>
+            </Container>
             <Container textAlign='justified'>
               <b>{movieDetails.tagline}</b>
-              <Divider />
+              <Divider/>
               <p>
                 {movieDetails.overview}
               </p>
-              <Divider />
-              <p>
               <u>Subgenres:</u> {
                   movieDetails.genres.map((genre)=>{
                     if(genre.id != 27){
@@ -84,9 +99,8 @@ const MovieDetails = (props) => {
                     }
                   })
                 }
-              </p>
+              
             </Container>
-        {JSON.stringify(movieDetails)}
           </div>
         }
       </div>
