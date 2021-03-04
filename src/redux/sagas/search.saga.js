@@ -4,25 +4,26 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* search(action){
     let query = action.payload
     try{
-        const response = yield axios.get(`/api/horror/search/${query}/1`);
+        let response = yield axios.get(`/api/horror/search/${query}/1`);
+        let horrorMovies = [];
         let pages = response.data.total_pages;
-        console.log(pages);
+        for (let i = 1; i < pages; i++) {
+            let page = i;
+            response = yield axios.get(`/api/horror/search/${query}/${page}`)
+
+            for(let movie of response.data.results){
+                for(let genre of movie.genre_ids){
+                    if(genre === 27){
+                        horrorMovies.push(movie);
+                    }
+                }  
+            }
+        }
+        console.log(horrorMovies);
         
-        yield put({ type: 'SET_MOVIES', payload: response.data.results });
-        /*axios({
-            method: 'GET',
-            url: `/api/horror/search/${query}`,
-        }).then((response) => {
-            dispatch({
-                type: 'SET_MOVIES',
-                payload: response.data
-            });
-        }).catch((error) => {
-            console.log(error);
-            alert(error);
-        })*/
-    }catch{
-    
+        yield put({ type: 'SET_MOVIES', payload: horrorMovies });
+    }catch(error){
+        console.log(error);
     }
 }
 function* searchSaga() {

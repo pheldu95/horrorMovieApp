@@ -8,8 +8,6 @@ import './MovieDetails.css';
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
-  const history = useHistory();
-
   const [movieDetails, setMovieDetails] = useState();
   const [opac, setOpac] = useState();
 
