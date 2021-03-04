@@ -34,7 +34,7 @@ img {
     padding: 5px;
     color: #f1f1f1;
     /* /* transition: .5s ease; */
-    opacity:0;
+    opacity: 0;
     width: 200px;
     height: 100px;
 
@@ -51,9 +51,8 @@ img {
 /* When you mouse over the container, fade in the overlay title */
 .container:hover .overlay {
     opacity: 1;
-
     /* blood fill thing */
-    background-position: 100% 50%;
+    background-position: 200% 50%;
     background-image: url('../../../assets/nav-bg-fill-blue.png');
 }
 
@@ -64,7 +63,6 @@ img {
 .text {
     opacity: 0;
     transition: opacity .5s ease;
-
     color: white;
     /* font-size: 20px; */
     position: absolute;

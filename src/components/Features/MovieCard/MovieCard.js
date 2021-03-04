@@ -52,7 +52,7 @@ const MovieCard = ({movie}) => {
       <img alt = "movie poster" className="img" src={'https://image.tmdb.org/t/p/w1280' + movie.poster_path} onClick={() => showDetails(movie.id)}/>
       <div className="overlay">
         <div className="text">
-          {movie.title}
+          <div className="movieTitle">{movie.title}</div>
           <br/>
           {movie.vote_average}/10
           <br/>

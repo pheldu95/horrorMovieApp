@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 html,
 body,
 #react-root {
@@ -5,7 +6,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #f8f8f8;
   margin: 0px;
   background-color: #14181d;
@@ -98,6 +99,7 @@ Form Treatment
 -------------------------------------------------------------------------------- */
 
 .formPanel {
+  color: #14181d;
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;
@@ -185,4 +187,10 @@ input {
     border-radius: 5px;
     box-shadow: 0 8px 40px -12px rgba(0,0,0,0.1);
     
+}
+
+/* -------------------------- fonts---------------------- */
+.movieTitle{
+  font-family: 'TiemposHeadlineWeb', 'sans sarif';
+  font-size: 150%;
 }
