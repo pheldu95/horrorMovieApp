@@ -20,6 +20,7 @@ class MoviesView extends Component {
         this.setState({
             page: this.props.match.params.page
         });
+        
     }
     getPopHorror = (page) => {
         axios({
@@ -56,6 +57,9 @@ class MoviesView extends Component {
             //we get the popular horror after we have the wathclist in the store. that way we can check if movies are on the watchlist
             //this.getPopHorror(this.state.page);
         }
+        if (this.props.location !== prevProps.location) {
+            window.scrollTo(0, 0)
+        }
     }
 
     //changes which tab is the 'active' tab
@@ -81,12 +85,32 @@ class MoviesView extends Component {
         })
         this.getPopHorror(next);
     }
-    render() {
+
+    lastPage = () =>{
+        let back = Number(this.props.match.params.page) - 1;
+        this.setState({
+            page: back
+        })
+        this.props.history.push(`/popular/${back}`);
+        //do i need to get watch list again?
+        this.props.dispatch({
+            type: 'GET_WATCH_LIST',
+            payload: { userId: this.props.store.user.id }
+        })
+        this.getPopHorror(back);
+    }
+
+    render(
+
+    ) {
         let movies = this.state.movies;
         let watchList = this.state.watchList;
         const activeItem = this.state.activeItem;
         return (
             <div>
+                <Button onClick={() => this.lastPage()}>Back</Button>
+                <br/>
+                <br/>
                 <Search />
                 <Menu tabular>
                     <Menu.Item
@@ -109,6 +133,7 @@ class MoviesView extends Component {
                     <MovieList movies={watchList} />
                 }
                 <LogOutButton className="log-in" />
+                <Button onClick={() => this.lastPage()}>Back</Button>
                 <Button onClick={() => this.nextPage()}>Next</Button>
             </div>
         );

@@ -90,17 +90,21 @@ const MovieDetails = (props) => {
                 {movieDetails.overview}
               </p>
               <u>Subgenres:</u> {
-                  movieDetails.genres.map((genre)=>{
-                    if(genre.id != 27){
-                      return <div>
-                        {genre.name}
-                        <br/>
-                      </div>
-                    }
-                  })
+                  movieDetails.genres.length > 1
+                    ?movieDetails.genres.map((genre)=>{
+                      if(genre.id != 27){
+                        return <div>
+                          {genre.name}
+                          <br/>
+                        </div>
+                      }
+                    })
+                    : <div>None</div>
                 }
+
               
             </Container>
+            {JSON.stringify(movieDetails)}
           </div>
         }
       </div>
