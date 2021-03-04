@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import './Search.css';
-import { useHistory, Link } from 'react-router-dom';
-import { Button, Input, Icon, Form } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
+import { Form } from 'semantic-ui-react';
 
 const Search = () => {
     const history = useHistory();

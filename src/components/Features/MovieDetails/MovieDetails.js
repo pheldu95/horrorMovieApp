@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import { Button, Container, Divider } from 'semantic-ui-react';
 import './MovieDetails.css';
@@ -11,24 +10,23 @@ const MovieDetails = (props) => {
   const [movieDetails, setMovieDetails] = useState();
   const [opac, setOpac] = useState();
 
-  useEffect(() => {
-    getMovieDetails();
-  },[])
-
   const getMovieDetails = () => {
     axios({
       method: 'GET',
       url: `/api/horror/details/${props.match.params.id}`
     }).then((response) => {
-      console.log(response);
-      console.log('response going to state:', response);
       setMovieDetails(response.data);
-
     }).catch((error) => {
       console.log(error);
       alert(error);
     })
   }
+
+  useEffect(() => {
+    getMovieDetails();
+  },[getMovieDetails])
+
+  
   
   const addToWatchList = () => {
     props.dispatch({ 
@@ -51,10 +49,18 @@ const MovieDetails = (props) => {
         {movieDetails&&
           <div className='detailsContainer'>
             <div className='background'>
-              <img style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`, opacity: opac }} />
+              <img 
+                alt = "movie backdrop" 
+                style={{ backgroundImage: `url("https://www.themoviedb.org/t/p/w300_and_h450_bestv2/${movieDetails.backdrop_path}"`, 
+                opacity: opac }} 
+              />
             </div>
             <Container textAlign='left'>
-              <img className="poster" src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} />
+              <img 
+                alt="movie poster" 
+                className="poster" 
+                src={'https://image.tmdb.org/t/p/w1280' + movieDetails.poster_path} 
+              />
               <br/>
               <br/>
               <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
