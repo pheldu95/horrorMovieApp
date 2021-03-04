@@ -17,9 +17,7 @@ const Search = () => {
         });
     }
     return (
-        
         <div>
-            <h1>{query}</h1>
             <Form onSubmit={() => submitQuery()}>
                 <Form.Group>
                     <Form.Input 
@@ -29,9 +27,6 @@ const Search = () => {
                         placeholder='Search...' 
                         onChange={(event) => setQuery(event.target.value)}
                     />
-                    {/* <Form.Button icon onClick = {() => submitQuery()}>
-                        <Icon name='search' />
-                    </Form.Button> */}
                 </Form.Group>
             </Form>
         </div>
