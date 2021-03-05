@@ -17,7 +17,7 @@ const SearchResults = (props) => {
     
     return (
         <>
-            <Search/>
+            {/* <Search/> */}
             <MovieList movies={movies} />
         </>
         

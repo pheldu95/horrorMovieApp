@@ -113,7 +113,7 @@ class MoviesView extends Component {
                 <Button onClick={() => this.lastPage()}>Back</Button>
                 <br/>
                 <br/>
-                <Search />
+                {/* <Search /> */}
                 <Menu inverted pointing secondary>
                     <Menu.Item
                         name='popular'

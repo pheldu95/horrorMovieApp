@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import Search from '../Features/Search/Search'
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -21,7 +22,11 @@ const Nav = (props) => {
       <Link to="/home">
         <h2 className="nav-title">Horror Movie App</h2>
       </Link>
+      
       <div className="nav-right">
+        <div className="search">
+          <Search />
+        </div>
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,

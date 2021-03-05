@@ -82,7 +82,7 @@ class UserPage extends Component {
     const activeItem = this.state.activeItem;
     return (
       <div>
-        <Search/>
+        {/* <Search/> */}
         <Menu inverted pointing secondary>
           <Menu.Item
             name='popular'
