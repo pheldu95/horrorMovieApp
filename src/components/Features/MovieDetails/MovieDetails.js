@@ -4,6 +4,7 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
 import { Button, Container, Divider, Statistic } from 'semantic-ui-react';
 import './MovieDetails.css';
+import MovieReview from './MovieReview';
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
@@ -101,7 +102,7 @@ const MovieDetails = (props) => {
                     })
                     : <div>None</div>
                 }
-
+              <MovieReview/>
               
             </Container>
             {JSON.stringify(movieDetails)}
