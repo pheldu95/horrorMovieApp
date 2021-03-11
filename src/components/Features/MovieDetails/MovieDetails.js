@@ -92,6 +92,7 @@ const MovieDetails = (props) => {
               <p>
                 {movieDetails.overview}
               </p>
+              <p>Runtime: {movieDetails.runtime} minutes</p>
               <u>Subgenres:</u> {
                   movieDetails.genres.length > 1
                     ?movieDetails.genres.map((genre)=>{
@@ -105,7 +106,7 @@ const MovieDetails = (props) => {
                     : <div>None</div>
                 }
               <SubgenrePicker/>
-              <TagsPicker/>
+              <TagsPicker movie={movieDetails}/>
               <MovieReview/>
               
             </Container>
