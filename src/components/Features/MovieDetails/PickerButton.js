@@ -4,7 +4,7 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { useHistory } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
-const PickerButton = ({pick, handlePick, handleRemovePick}) => {
+const PickerButton = ({choice, handlePick, handleRemovePick}) => {
     const [selected, setSelected] = useState(false);
     const handleClick = (id) =>{
         setSelected(!selected);
@@ -17,8 +17,8 @@ const PickerButton = ({pick, handlePick, handleRemovePick}) => {
     return (
         <Fragment>
             {selected?
-                <Button active onClick={(() => handleClick(pick.id))}>{pick.name}</Button>
-                : <Button onClick={(() => handleClick(pick.id))}>{pick.name}</Button>
+                <Button active onClick={(() => handleClick(choice.id))}>{choice.name}</Button>
+                : <Button onClick={(() => handleClick(choice.id))}>{choice.name}</Button>
             }
         </Fragment>
     );

@@ -4,11 +4,10 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Header, Modal } from 'semantic-ui-react';
-import PickerButton from './PickerButton';
+import Picker from './Picker';
 
 const SubgenrePicker = (movie) => {
     const history = useHistory();
-    const [review, setReview] = useState();
     const [subgenres, setSubgenres] = useState();
     const [open, setOpen] = useState(false)
     const [picks, setPicks] = useState([]);
@@ -50,14 +49,7 @@ const SubgenrePicker = (movie) => {
             open={open}
             trigger={<Button size='mini'>Pick Subgenre</Button>}
         >
-           {subgenres&&
-                subgenres.map((subgenre)=>{
-                   return(
-                    //    <PickerButton pick={subgenre} onClick={() => setPicks([...picks, subgenre.id])}/>
-                       <PickerButton pick={subgenre} handlePick={handlePick} handleRemovePick={handleRemovePick}/>
-                    )
-               })
-           }
+            <Picker choices={subgenres} handlePick={handlePick} handleRemovePick={handleRemovePick}/>
             <br />
             <br />
             <Button.Group>
