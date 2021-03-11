@@ -11,6 +11,7 @@ const SubgenrePicker = (movie) => {
     const [review, setReview] = useState();
     const [subgenres, setSubgenres] = useState();
     const [open, setOpen] = useState(false)
+    const [picks, setPicks] = useState([]);
 
     useEffect(() => {
         axios({
@@ -25,8 +26,21 @@ const SubgenrePicker = (movie) => {
     }, []);
 
     const submit = () => {
-        console.log(review);
+        console.log(picks);
 
+    }
+
+    //add a pick to the array of picks that we will send to the db
+    const handlePick = (id) =>{
+        setPicks([...picks, id])
+    }
+    //remove from array of picks
+    const handleRemovePick = (id) =>{
+        for (let i = 0; i < picks.length; i++) {
+           if(picks[i] === id){
+               picks.splice(i, 1);    
+           } 
+        }
     }
 
     return (
@@ -39,7 +53,8 @@ const SubgenrePicker = (movie) => {
            {subgenres&&
                 subgenres.map((subgenre)=>{
                    return(
-                       <PickerButton pick={subgenre}/>
+                    //    <PickerButton pick={subgenre} onClick={() => setPicks([...picks, subgenre.id])}/>
+                       <PickerButton pick={subgenre} handlePick={handlePick} handleRemovePick={handleRemovePick}/>
                     )
                })
            }
@@ -47,7 +62,7 @@ const SubgenrePicker = (movie) => {
             <br />
             <Button.Group>
                 <Button>Cancel</Button>
-                <Button>Submit</Button>
+                <Button onClick={() => submit()}>Submit</Button>
             </Button.Group>
         </Modal>
     );
