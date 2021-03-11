@@ -4,6 +4,7 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Header, Modal } from 'semantic-ui-react';
+import PickerButton from './PickerButton';
 
 const SubgenrePicker = (movie) => {
     const history = useHistory();
@@ -38,10 +39,16 @@ const SubgenrePicker = (movie) => {
            {subgenres&&
                 subgenres.map((subgenre)=>{
                    return(
-                       <Button>{subgenre.name}</Button>
+                       <PickerButton pick={subgenre}/>
                     )
                })
            }
+            <br />
+            <br />
+            <Button.Group>
+                <Button>Cancel</Button>
+                <Button>Submit</Button>
+            </Button.Group>
         </Modal>
     );
 }
