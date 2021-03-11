@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const horrorRouter = require('./routes/horror.router');
 const watchListRouter = require('./routes/watchList.router');
 const subgenresRouter = require('./routes/subgenres.router');
+const tagsRouter = require('./routes/tags.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,6 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/horror', horrorRouter);
 app.use('/api/watchList', watchListRouter);
 app.use('/api/subgenres', subgenresRouter);
+app.use('/api/tags', tagsRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -7,16 +7,15 @@ import { Button, Header, Modal } from 'semantic-ui-react';
 
 const SubgenrePicker = (movie) => {
     const history = useHistory();
-    const [review, setReview] = useState();
-    const [subgenres, setSubgenres] = useState();
+    const [tags, setTags] = useState();
     const [open, setOpen] = useState(false)
 
     useEffect(() => {
         axios({
             method: 'GET',
-            url: '/api/subgenres'
+            url: '/api/tags'
         }).then((response) => {
-            setSubgenres(response.data.rows);
+            setTags(response.data.rows);
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -24,8 +23,7 @@ const SubgenrePicker = (movie) => {
     }, []);
 
     const submit = () => {
-        console.log(review);
-
+    
     }
 
     return (
@@ -33,15 +31,15 @@ const SubgenrePicker = (movie) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button size='mini'>Pick Subgenre</Button>}
+            trigger={<Button size='mini'>Pick Tags</Button>}
         >
-           {subgenres&&
-                subgenres.map((subgenre)=>{
-                   return(
-                       <Button>{subgenre.name}</Button>
+            {tags &&
+                tags.map((tag) => {
+                    return (
+                        <Button>{tag.name}</Button>
                     )
-               })
-           }
+                })
+            }
         </Modal>
     );
 }
