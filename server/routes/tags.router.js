@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
     });
 })
 
+//get all tags for a movie
+router.get('/:movieId', (req, res) => {
+    let movieId = req.params.movieId;
+    let queryText = `SELECT tags.name, tags.id, movie_to_tag.count FROM tags JOIN movie_to_tag ON movie_to_tag.tag_id = tags.id WHERE movie_to_tag.movie_id = ${movieId};`;
+    pool.query(queryText).then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
+
 //will try and post the tag, but if it alread exists, will give a bad response
 router.post('/', (req, res) => {
     let tagIds = req.body.tagIds;

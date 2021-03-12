@@ -7,12 +7,18 @@ function* postTags(action) {
     let tagIds = action.payload.tagIds;
     let movieId = action.payload.movieId;
     try {
-        //or maybe do a get request? to check for tags in db. and then do the posting and putting?
-        yield axios({
-            method: 'POST',
-            url: `/api/tags`,
-            data: { tagIds: tagIds, movieId: movieId }
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/tags/${movieId}`,
         });
+        console.log(response.data);
+        
+        //or maybe do a get request? to check for tags in db. and then do the posting and putting?
+        // yield axios({
+        //     method: 'POST',
+        //     url: `/api/tags`,
+        //     data: { tagIds: tagIds, movieId: movieId }
+        // });
         // yield put({
         //     type: 'GET_WATCH_LIST',
         // });
