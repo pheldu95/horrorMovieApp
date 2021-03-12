@@ -106,9 +106,8 @@ const MovieDetails = (props) => {
                     : <div>None</div>
                 }
               <SubgenrePicker/>
-              <Tags movie={movieDetails}/>
               <MovieReview/>
-              
+              <Tags movie={movieDetails} />
             </Container>
             {JSON.stringify(movieDetails)}
           </div>

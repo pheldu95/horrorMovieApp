@@ -60,4 +60,19 @@ router.post('/', (req, res) => {
     //     })
 });
 
+//put request to update a tag's count
+router.put('/:movieId/', (req, res) => {
+    let movieId = req.params.movieId;
+    let tag = req.body.tag;
+    
+    let queryText = `UPDATE "movie_to_tag" SET count = count+1
+                    WHERE "movie_id" = ${movieId} AND "tag_id" = ${tag};`;
+    pool.query(queryText).then((results) => {
+        res.sendStatus(200);
+    }).catch((err) => {
+        res.sendStatus(500);
+        console.log(err);
+    })
+})
+
 module.exports = router;

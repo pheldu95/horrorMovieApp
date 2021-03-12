@@ -27,20 +27,29 @@ const Tags = ({ movie }) => {
     //getting the pickedTags from TagsPicker. we send this function to tagspicker as a prop
     const submit = (pickedTags) => {
         let tagsAlreadyInDb = [];
+        let newTags = []
         for (let i = 0; i < pickedTags.length; i++) {
             let tagExists = false;
             for (let existingTag of currentMoviePickedTags) {
-                console.log(existingTag);
-                
                 if (pickedTags[i] === existingTag.id) {
+                    console.log(pickedTags[i], existingTag.id);
                     tagExists = true;
                 }
             }
             if (tagExists) {
                 tagsAlreadyInDb.push(pickedTags[i]);
-                pickedTags.splice(i, 1);
+            }else{
+                newTags.push(pickedTags[i]);
             }
         }
+        dispatch({
+            type: 'UP_TAG_COUNTS',
+            payload: { movieId: movie.id, tags: tagsAlreadyInDb }
+        })
+        dispatch({
+            type: 'POST_NEW_TAGS',
+            payload: { movieId: movie.id, tags: newTags }
+        })
     }
 
     return (
