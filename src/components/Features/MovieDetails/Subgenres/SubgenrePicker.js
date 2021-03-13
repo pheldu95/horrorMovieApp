@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../../redux/mapStoreToProps';
+import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Header, Modal } from 'semantic-ui-react';
-import Picker from './Picker';
+import Picker from '../Picker';
 
-const SubgenrePicker = (movie) => {
+const SubgenrePicker = ({submit}) => {
     const history = useHistory();
     const [subgenres, setSubgenres] = useState();
     const [open, setOpen] = useState(false)
@@ -23,11 +23,6 @@ const SubgenrePicker = (movie) => {
             alert(error);
         })
     }, []);
-
-    const submit = () => {
-        console.log(picks);
-
-    }
 
     //add a pick to the array of picks that we will send to the db
     const handlePick = (id) =>{
@@ -54,7 +49,7 @@ const SubgenrePicker = (movie) => {
             <br />
             <Button.Group>
                 <Button>Cancel</Button>
-                <Button onClick={() => submit()}>Submit</Button>
+                <Button onClick={() => submit(picks)}>Submit</Button>
             </Button.Group>
         </Modal>
     );

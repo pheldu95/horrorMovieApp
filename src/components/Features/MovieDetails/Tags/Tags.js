@@ -1,15 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Header, Modal } from 'semantic-ui-react';
 import TagsPicker from './TagsPicker';
 
 const Tags = ({ movie }) => {
-    const history = useHistory();
     const [currentMoviePickedTags, setCurrentMoviePickedTags] = useState();
-    const [picks, setPicks] = useState([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -65,7 +61,7 @@ const Tags = ({ movie }) => {
                     )
                 })
             }
-            <TagsPicker movie={movie} submit={submit}/>
+            <TagsPicker submit={submit}/>
         </Fragment>
     );
 }

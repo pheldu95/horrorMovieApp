@@ -5,8 +5,8 @@ import axios from 'axios';
 import { Button, Container, Divider, Statistic } from 'semantic-ui-react';
 import './MovieDetails.css';
 import MovieReview from './MovieReview';
-import SubgenrePicker from './SubgenrePicker';
 import Tags from './Tags/Tags';
+import Subgenres from './Subgenres/Subgenres';
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
@@ -105,7 +105,7 @@ const MovieDetails = (props) => {
                     })
                     : <div>None</div>
                 }
-              <SubgenrePicker/>
+              <Subgenres movie={movieDetails}/>
               <MovieReview/>
               <Tags movie={movieDetails} />
             </Container>
