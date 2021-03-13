@@ -42,7 +42,7 @@ const SubgenrePicker = ({submit}) => {
             onClose={() => setOpen(false)}
             onOpen={() => setOpen(true)}
             open={open}
-            trigger={<Button size='mini'>Pick Subgenre</Button>}
+            trigger={<Button size='mini'>Pick Subgenres</Button>}
         >
             <Picker choices={subgenres} handlePick={handlePick} handleRemovePick={handleRemovePick}/>
             <br />

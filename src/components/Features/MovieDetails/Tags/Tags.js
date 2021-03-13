@@ -61,6 +61,7 @@ const Tags = ({ movie }) => {
                     )
                 })
             }
+            <br/>
             <TagsPicker submit={submit}/>
         </Fragment>
     );

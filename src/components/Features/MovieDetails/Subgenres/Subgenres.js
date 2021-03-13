@@ -59,6 +59,7 @@ const Subgenres = ({ movie }) => {
                     )
                 })
             }
+            <br/>
             <SubgenrePicker submit={submit} />
         </Fragment>
     );
