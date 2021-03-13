@@ -48,12 +48,8 @@ function* postTags(action) {
 }
 function* upTagCounts(action) {
     let tags = action.payload.tags;
-    console.log(tags);
-    
     let movieId = action.payload.movieId;
     for(let tag of tags){
-        // console.log(tag);
-        
         try{
             yield axios({
                 method: 'PUT',
@@ -64,21 +60,22 @@ function* upTagCounts(action) {
             console.log('error while upping a tag count');
         }
     }
-    
-    // try {
-    //     yield axios({
-    //         method: 'PUT',
-    //         url: `/api/groupPackingList/rental/${action.payload.movieId}`,
-    //         data: action.payload.tags
-    //     })
-    // } catch (error) {
-    //     console.log(error);
-    // }
-    
 }
 function* postNewTags(action) {
     console.log('newtags', action.payload);
-    
+    let tags = action.payload.tags;
+    let movieId = action.payload.movieId;
+    for (let tag of tags) {
+        try {
+            yield axios({
+                method: 'POST',
+                url: `/api/tags/${movieId}`,
+                data: { tag: tag }
+            })
+        } catch (error) {
+            console.log('error could not post tag');
+        }
+    }
 }
 
 function* tagSaga() {

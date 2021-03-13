@@ -42,14 +42,18 @@ const Tags = ({ movie }) => {
                 newTags.push(pickedTags[i]);
             }
         }
-        dispatch({
-            type: 'UP_TAG_COUNTS',
-            payload: { movieId: movie.id, tags: tagsAlreadyInDb }
-        })
-        dispatch({
-            type: 'POST_NEW_TAGS',
-            payload: { movieId: movie.id, tags: newTags }
-        })
+        if(tagsAlreadyInDb.length > 0){
+            dispatch({
+                type: 'UP_TAG_COUNTS',
+                payload: { movieId: movie.id, tags: tagsAlreadyInDb }
+            })
+        }
+        if(newTags.length > 0){
+            dispatch({
+                type: 'POST_NEW_TAGS',
+                payload: { movieId: movie.id, tags: newTags }
+            })
+        }
     }
 
     return (

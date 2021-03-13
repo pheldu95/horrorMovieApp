@@ -27,37 +27,19 @@ router.get('/:movieId', (req, res) => {
 })
 
 //will try and post the tag, but if it alread exists, will give a bad response
-router.post('/', (req, res) => {
-    let tagIds = req.body.tagIds;
-    let movieId = req.body.movieId;
-    let queryText;
-    for(tag of tagIds){
-        queryText = `SELECT COUNT(1)
-                    FROM "movie_to_subgenre"
-                    WHERE "movie_id" = ${movieId} AND "subgenre_id" = ${tag};`
-        // pool.query(queryText)
-        // .then(result => {
-        //     console.log(result);
-            
-        //     res.sendStatus(201);
-        // }).catch(error => {
-        //     console.log('error adding to watch list');
-        //     res.sendStatus(500);
-        // })
-        
-        
-    }
+router.post('/:movieId', (req, res) => {
+    let tagId = req.body.tag;
+    let movieId = req.params.movieId;
+    console.log(tagId, movieId);
     
-    // let item = req.body;
-    // let queryText = `INSERT INTO "watch_list" ("user_id", "movie_id")
-    //                     VALUES ($1, $2)`;
-    // pool.query(queryText, [item.userId, item.movieId])
-    //     .then(result => {
-    //         res.sendStatus(201);
-    //     }).catch(error => {
-    //         console.log('error adding to watch list');
-    //         res.sendStatus(500);
-    //     })
+    let queryText = `INSERT INTO movie_to_tag (movie_id, tag_id) VALUES (${movieId}, ${tagId});`;
+    pool.query(queryText)
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            console.log('error adding tag for movie');
+            res.sendStatus(500);
+        })
 });
 
 //put request to update a tag's count
