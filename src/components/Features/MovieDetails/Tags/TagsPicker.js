@@ -10,6 +10,8 @@ const TagsPicker = ({submit}) => {
     const [picks, setPicks] = useState([]);
 
     useEffect(() => {
+        console.log('tagspicker useeffect');
+        
         axios({
             method: 'GET',
             url: '/api/tags'

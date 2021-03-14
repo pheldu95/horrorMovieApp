@@ -3,12 +3,15 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import axios from 'axios';
 import TagsPicker from './TagsPicker';
+import '../MovieDetails.css';
 
 const Tags = ({ movie }) => {
     const [currentMoviePickedTags, setCurrentMoviePickedTags] = useState();
     const dispatch = useDispatch();
 
     useEffect(() => { 
+        console.log('tags useeffect');
+        
         axios({
             method: 'GET',
             url: `/api/tags/${movie.id}`
@@ -55,17 +58,20 @@ const Tags = ({ movie }) => {
     }
 
     return (
-        <Fragment>
-            {currentMoviePickedTags&&
-                currentMoviePickedTags.map((tag)=>{
-                    return(
-                        tag.name
-                    )
-                })
-            }
-            <br/>
+        <>
+            <div style={{display:'flex'}}>
+                {currentMoviePickedTags&&
+                    currentMoviePickedTags.map((tag)=>{
+                        return(
+                            <div className='tagButton'>{tag.name}</div>
+                        )
+                    })
+                }
+                <br/>
+                
+            </div>
             <TagsPicker submit={submit}/>
-        </Fragment>
+        </>
     );
 }
 export default connect(mapStoreToProps)(Tags);

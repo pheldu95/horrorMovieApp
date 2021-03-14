@@ -21,6 +21,8 @@ const MovieCard = ({movie}) => {
   //because added [watchList], the component will run useEffect again if
   //the watchlist changes.
   useEffect(() => {
+    console.log('moviecard useEffect');
+    
     watchListCheck();
   }, [watchList, watchListCheck]);
 

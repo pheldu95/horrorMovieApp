@@ -10,6 +10,8 @@ const SearchResults = (props) => {
     const [subgenreName, setSubgenreName] = useState();
     const movies = useSelector((state) => state.movies)
     useEffect(() => {
+        console.log('subgenre search useeefect');
+        
         axios({
             method: 'GET',
             url: `/api/subgenres/subgenreTitle/${subgenreId}`

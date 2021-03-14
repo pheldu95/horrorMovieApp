@@ -34,3 +34,26 @@
    width: 250px;
    height: auto;
 }
+
+.subgenreButton{
+    cursor:pointer;
+    vertical-align:middle;
+    max-width: 100px;    
+}
+.tagButton{
+    font-size: 80%;
+    display:inline-block;
+    cursor:pointer;
+    vertical-align:middle;
+    max-width: 100px;
+    padding: 5px;
+    
+}
+.tagButton:hover {
+    color: #b90e0a;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+.subgenreButton:hover {
+    color: #b90e0a;
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}

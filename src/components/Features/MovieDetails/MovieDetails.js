@@ -39,9 +39,11 @@ const MovieDetails = (props) => {
   }
 
   useEffect(() => {
+    console.log('details useffect');
+    
     getMovieDetails();
     watchListCheck();
-  }, [watchListCheck])
+  }, [])
 
   
 

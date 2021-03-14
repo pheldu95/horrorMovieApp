@@ -8,6 +8,8 @@ const SearchResults = (props) => {
     const query = props.match.params.query;
     const movies = useSelector((state) => state.movies)
     useEffect(() => {
+        console.log('searchresults useeffect');
+        
         dispatch({
             type: 'SEARCH',
             payload: query

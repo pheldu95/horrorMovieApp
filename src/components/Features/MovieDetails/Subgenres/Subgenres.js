@@ -11,6 +11,8 @@ const Subgenres = ({ movie }) => {
     const history = useHistory();
 
     useEffect(() => {
+        console.log('subgenres useeffect');
+        
         axios({
             method: 'GET',
             url: `/api/subgenres/${movie.id}`
@@ -60,7 +62,7 @@ const Subgenres = ({ movie }) => {
             {currentMoviePickedSubgenres &&
                 currentMoviePickedSubgenres.map((subgenre) => {
                     return (
-                        <div onClick={() => subgenreSearch(subgenre.id)}>{subgenre.name}</div>
+                        <div className='subgenreButton' onClick={() => subgenreSearch(subgenre.id)}>{subgenre.name}</div>
                     )
                 })
             }

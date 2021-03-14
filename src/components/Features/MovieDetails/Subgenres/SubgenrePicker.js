@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Modal } from 'semantic-ui-react';
 import Picker from '../Picker';
 
 const SubgenrePicker = ({submit}) => {
-    const history = useHistory();
     const [subgenres, setSubgenres] = useState();
     const [open, setOpen] = useState(false);
     const [picks, setPicks] = useState([]);
 
     useEffect(() => {
+        console.log('subgenrepicker useffect');
+        
         axios({
             method: 'GET',
             url: '/api/subgenres'
