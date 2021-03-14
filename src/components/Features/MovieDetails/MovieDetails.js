@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
 import { Button, Container, Divider, Statistic } from 'semantic-ui-react';
@@ -7,17 +7,22 @@ import './MovieDetails.css';
 import MovieReview from './MovieReview';
 import Tags from './Tags/Tags';
 import Subgenres from './Subgenres/Subgenres';
+import { watchListChecker } from '../../App/Common/watchListChecker';
+
 
 //we take props so that we can get the movie id from the url. using match.params
 const MovieDetails = (props) => {
+  const movieId = props.match.params.id;
   const [movieDetails, setMovieDetails] = useState();
   const [releaseYear, setReleaseYear]  = useState();
   const [opac, setOpac] = useState();
+  const [onWatchList, setOnWatchList] = useState(false);
+  const watchList = useSelector((state) => state.watchList)
 
   const getMovieDetails = () => {
     axios({
       method: 'GET',
-      url: `/api/horror/details/${props.match.params.id}`
+      url: `/api/horror/details/${movieId}`
     }).then((response) => {
       setMovieDetails(response.data);
       let year = response.data.release_date.substring(0, 4);
@@ -30,15 +35,31 @@ const MovieDetails = (props) => {
 
   useEffect(() => {
     getMovieDetails();
-  },[getMovieDetails])
+    watchListCheck();
+  }, [watchListCheck])
 
-  
-  
-  const addToWatchList = () => {
+  const watchListCheck = () => {
+    let response = watchListChecker(movieId, watchList);
+    console.log(response);
+    
+    setOnWatchList(response);
+  }
+
+  const addToWatchList = () => { 
     props.dispatch({ 
       type: 'ADD_TO_WATCH_LIST', 
       payload: { movieId: movieDetails.id, userId: props.store.user.id } 
     })
+    setOnWatchList(true);
+  }
+
+  const deleteFromWatchList = () => {
+    console.log(onWatchList);
+    props.dispatch({
+      type: 'DELETE_FROM_WATCH_LIST',
+      payload: { movieId: movieDetails.id, userId: props.store.user.id }
+    });
+    setOnWatchList(false);
   }
 
   //used to change the opacity of the background photo as the user scrolls down
@@ -70,7 +91,10 @@ const MovieDetails = (props) => {
               />
               <br/>
               <br/>
-              <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
+              {onWatchList
+                ? <Button className="addToWatch" onClick={() => deleteFromWatchList()}>Remove from Watch List</Button>
+                : <Button className="addToWatch" onClick={() => addToWatchList()}>Add to Watch List</Button>
+              }
               <Statistic.Group size='mini'>
                 <Statistic inverted >
                   <Statistic.Value>{movieDetails.vote_average}/10</Statistic.Value>
