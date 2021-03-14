@@ -34,9 +34,18 @@ function* postNewSubgenres(action) {
     }
 }
 
+function* getSubgenreMovies(action){
+    let subgenreId = action.payload;
+    const response = yield axios.get(`/api/subgenres/getSubgenreMovies/${subgenreId}`);
+    
+    
+    
+}
+
 function* subgenreSaga() {
     yield takeLatest('UP_SUBGENRE_COUNTS', upSubgenreCounts);
     yield takeLatest('POST_NEW_SUBGENRES', postNewSubgenres);
+    yield takeLatest('SUBGENRE_SEARCH', getSubgenreMovies);
 }
 
 export default subgenreSaga;

@@ -3,10 +3,12 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import axios from 'axios';
 import SubgenrePicker from './SubgenrePicker';
+import { useHistory } from "react-router-dom";
 
 const Subgenres = ({ movie }) => {
     const [currentMoviePickedSubgenres, setCurrentMoviePickedSubgenres] = useState();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         axios({
@@ -50,12 +52,15 @@ const Subgenres = ({ movie }) => {
         }
     }
 
+    const subgenreSearch = (subgenreId) =>{
+        history.push(`/subgenreSearch/${subgenreId}`);
+    }
     return (
         <Fragment>
             {currentMoviePickedSubgenres &&
                 currentMoviePickedSubgenres.map((subgenre) => {
                     return (
-                        subgenre.name
+                        <div onClick={() => subgenreSearch(subgenre.id)}>{subgenre.name}</div>
                     )
                 })
             }

@@ -20,10 +20,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import MovieDetails from '../Features/MovieDetails/MovieDetails';
-
-import './App.css';
 import PopMovies from '../Features/PopMovies/PopMovies';
 import SearchResults from '../Features/Search/SearchResults';
+import SubgenreSearch from '../Features/SubgenreSearch/SubgenreSearch';
+
+import './App.css';
 
 class App extends Component {
   componentDidMount() {
@@ -121,6 +122,15 @@ class App extends Component {
               exact
               path="/search/:query/:page"
               component={SearchResults}
+            />
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/subgenreSearch/:subgenreId"
+              component={SubgenreSearch}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

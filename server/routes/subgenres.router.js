@@ -40,7 +40,7 @@ router.post('/:movieId', (req, res) => {
         })
 });
 
-router.put('/:movieId/', (req, res) => {
+router.put('/:movieId', (req, res) => {
     let movieId = req.params.movieId;
     let subgenre = req.body.subgenre;
 
@@ -52,6 +52,21 @@ router.put('/:movieId/', (req, res) => {
         res.sendStatus(500);
         console.log(err);
     })
+})
+
+router.get('/getSubgenreMovies/:subgenreId', (req, res) => {
+    let subgenreId = req.params.subgenreId;
+    console.log(subgenreId);
+    
+    let queryText = `SELECT count, movie_id
+                    FROM movie_to_subgenre
+                    WHERE subgenre_id = $1 ORDER BY count DESC;`;
+    pool.query(queryText, [subgenreId]).then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
 })
 
 module.exports = router;
