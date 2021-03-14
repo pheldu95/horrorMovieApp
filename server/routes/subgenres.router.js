@@ -14,6 +14,19 @@ router.get('/', (req, res) => {
     });
 })
 
+//get a subgenre title from the db
+router.get('/subgenreTitle/:subgenreId', (req, res) => {
+    let subgenreId = req.params.subgenreId;
+    let queryText = 'Select name FROM subgenres WHERE id = $1;'
+    pool.query(queryText, [subgenreId])
+    .then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
+//get subgenres associated with movie
 router.get('/:movieId', (req, res) => {
     let movieId = req.params.movieId;
     let queryText = `SELECT subgenres.name, subgenres.id, movie_to_subgenre.count FROM subgenres JOIN movie_to_subgenre ON movie_to_subgenre.subgenre_id = subgenres.id WHERE movie_to_subgenre.movie_id = ${movieId};`;
@@ -54,6 +67,7 @@ router.put('/:movieId', (req, res) => {
     })
 })
 
+//get movies for a subgenre, sorted by count
 router.get('/getSubgenreMovies/:subgenreId', (req, res) => {
     let subgenreId = req.params.subgenreId;
     console.log(subgenreId);

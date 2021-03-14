@@ -9,7 +9,7 @@ import Picker from '../Picker';
 const SubgenrePicker = ({submit}) => {
     const history = useHistory();
     const [subgenres, setSubgenres] = useState();
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
     const [picks, setPicks] = useState([]);
 
     useEffect(() => {

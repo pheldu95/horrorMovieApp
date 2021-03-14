@@ -36,10 +36,14 @@ function* postNewSubgenres(action) {
 
 function* getSubgenreMovies(action){
     let subgenreId = action.payload;
-    const response = yield axios.get(`/api/subgenres/getSubgenreMovies/${subgenreId}`);
-    
-    
-    
+    let response = yield axios.get(`/api/subgenres/getSubgenreMovies/${subgenreId}`);
+    let subgenreMovies = response.data.rows;
+    let moviesToSendToReducer = [];
+    for (const movie of subgenreMovies) {
+        response = yield axios.get(`/api/horror/details/${movie.movie_id}`);
+        moviesToSendToReducer.push(response.data);
+    }
+    yield put({ type: 'SET_MOVIES', payload: moviesToSendToReducer });
 }
 
 function* subgenreSaga() {
