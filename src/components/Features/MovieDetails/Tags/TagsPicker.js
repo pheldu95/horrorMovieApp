@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react';
 import Picker from '../Picker';
 const TagsPicker = ({submit}) => {
-    const history = useHistory();
     const [tags, setTags] = useState();
     const [open, setOpen] = useState(false)
     const [picks, setPicks] = useState([]);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         axios({

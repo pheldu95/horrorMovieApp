@@ -33,17 +33,17 @@ const MovieDetails = (props) => {
     })
   }
 
+  const watchListCheck = () => {
+    let response = watchListChecker(movieId, watchList);
+    setOnWatchList(response);
+  }
+
   useEffect(() => {
     getMovieDetails();
     watchListCheck();
   }, [watchListCheck])
 
-  const watchListCheck = () => {
-    let response = watchListChecker(movieId, watchList);
-    console.log(response);
-    
-    setOnWatchList(response);
-  }
+  
 
   const addToWatchList = () => { 
     props.dispatch({ 

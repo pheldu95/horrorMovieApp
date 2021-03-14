@@ -1,7 +1,6 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import { Button, Header, Modal } from 'semantic-ui-react';
 import PickerButton from './PickerButton';
 
 const Picker = ({ choices, handlePick, handleRemovePick }) => {

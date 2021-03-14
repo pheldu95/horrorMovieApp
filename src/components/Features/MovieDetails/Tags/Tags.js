@@ -8,7 +8,7 @@ const Tags = ({ movie }) => {
     const [currentMoviePickedTags, setCurrentMoviePickedTags] = useState();
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect(() => { 
         axios({
             method: 'GET',
             url: `/api/tags/${movie.id}`
@@ -18,12 +18,14 @@ const Tags = ({ movie }) => {
             console.log(error);
             alert(error);
         })
-    }, []);
+    }, [movie.id]);
 
     //getting the pickedTags from TagsPicker. we send this function to tagspicker as a prop
     const submit = (pickedTags) => {
         let tagsAlreadyInDb = [];
         let newTags = []
+        console.log(pickedTags, currentMoviePickedTags);
+        
         for (let i = 0; i < pickedTags.length; i++) {
             let tagExists = false;
             for (let existingTag of currentMoviePickedTags) {

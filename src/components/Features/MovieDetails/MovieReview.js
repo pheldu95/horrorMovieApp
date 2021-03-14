@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import { useHistory } from 'react-router-dom';
 import { Form, TextArea, Menu, Rating } from 'semantic-ui-react';
 
-const MovieReview = (movie) => {
-    const history = useHistory();
+const MovieReview = ({movie}) => {
     const [reviewToggle, setReviewToggle] = useState(false);
     const [review, setReview] = useState();
 

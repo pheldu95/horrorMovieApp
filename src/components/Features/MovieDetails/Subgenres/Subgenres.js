@@ -20,7 +20,7 @@ const Subgenres = ({ movie }) => {
             console.log(error);
             alert(error);
         })
-    }, []);
+    }, [movie.id]);
 
     const submit = (pickedSubgenres) => {
         let subgenresAlreadyInDb = [];

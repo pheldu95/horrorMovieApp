@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Header, Modal } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react';
 import Picker from '../Picker';
 
 const SubgenrePicker = ({submit}) => {

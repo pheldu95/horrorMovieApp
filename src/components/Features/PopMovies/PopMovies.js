@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
 import MovieList from '../MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
-import Search from '../Search/Search';
 import { Button } from 'semantic-ui-react';
 
 class MoviesView extends Component {

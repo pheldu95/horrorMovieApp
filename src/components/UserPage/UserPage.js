@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 import MovieList from '../Features/MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
-import Search from '../Features/Search/Search';
 import { Button } from 'semantic-ui-react';
 
 class UserPage extends Component {
