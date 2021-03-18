@@ -57,6 +57,7 @@ const Subgenres = ({ movie }) => {
     const subgenreSearch = (subgenreId) =>{
         history.push(`/subgenreSearch/${subgenreId}`);
     }
+    
     return (
         <Fragment>
             {currentMoviePickedSubgenres &&

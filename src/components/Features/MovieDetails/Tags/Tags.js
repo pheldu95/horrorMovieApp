@@ -4,10 +4,12 @@ import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import axios from 'axios';
 import TagsPicker from './TagsPicker';
 import '../MovieDetails.css';
+import { useHistory } from "react-router-dom";
 
 const Tags = ({ movie }) => {
     const [currentMoviePickedTags, setCurrentMoviePickedTags] = useState();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => { 
         console.log('tags useeffect');
@@ -57,13 +59,17 @@ const Tags = ({ movie }) => {
         }
     }
 
+    const tagSearch = (tagId) => {
+        history.push(`/tagSearch/${tagId}`);
+    }
+
     return (
         <>
             <div style={{display:'flex'}}>
                 {currentMoviePickedTags&&
                     currentMoviePickedTags.map((tag)=>{
                         return(
-                            <div className='tagButton'>{tag.name}</div>
+                            <div className='tagButton' onClick={() => tagSearch(tag.id)}>{tag.name}</div>
                         )
                     })
                 }

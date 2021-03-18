@@ -14,6 +14,19 @@ router.get('/', (req, res) => {
     });
 })
 
+//get a tag title from the db
+router.get('/tagTitle/:tagId', (req, res) => {
+    let tagId = req.params.tagId;
+    let queryText = 'Select name FROM tags WHERE id = $1;'
+    pool.query(queryText, [tagId])
+        .then((response) => {
+            res.send(response);
+        }).catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        });
+})
+
 //get all tags for a movie
 router.get('/:movieId', (req, res) => {
     let movieId = req.params.movieId;
@@ -57,4 +70,19 @@ router.put('/:movieId/', (req, res) => {
     })
 })
 
+//get movies for a tag, sorted by count
+router.get('/getTagMovies/:tagId', (req, res) => {
+    let tagId = req.params.tagId;
+    console.log(tagId);
+
+    let queryText = `SELECT count, movie_id
+                    FROM movie_to_tag
+                    WHERE tag_id = $1 ORDER BY count DESC;`;
+    pool.query(queryText, [tagId]).then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
 module.exports = router;

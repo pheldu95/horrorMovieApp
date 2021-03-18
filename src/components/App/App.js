@@ -23,6 +23,7 @@ import MovieDetails from '../Features/MovieDetails/MovieDetails';
 import PopMovies from '../Features/PopMovies/PopMovies';
 import SearchResults from '../Features/Search/SearchResults';
 import SubgenreSearch from '../Features/SubgenreSearch/SubgenreSearch';
+import TagSearch from '../Features/TagSearch/TagSearch';
 
 import './App.css';
 
@@ -131,6 +132,15 @@ class App extends Component {
               exact
               path="/subgenreSearch/:subgenreId"
               component={SubgenreSearch}
+            />
+
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/tagSearch/:tagId"
+              component={TagSearch}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
