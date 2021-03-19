@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Feed } from 'semantic-ui-react';
 import axios from 'axios';
+import ReviewItem from './ReviewItem';
 
 const MovieReviewsDisplay = ({movie}) => {
     const [activeItem, setActiveItem] = useState('popular reviews');
@@ -63,15 +64,24 @@ const MovieReviewsDisplay = ({movie}) => {
                     Recent Reviews
                 </Menu.Item>
             </Menu>
-            {activeItem === 'popular reviews' &&
-                popularReviews &&
-                JSON.stringify(popularReviews[0])
-            }
-            {activeItem === 'recent reviews' &&
-                recentReviews &&
-                JSON.stringify(recentReviews[0])
-            }
-
+            <Feed>
+                {activeItem === 'popular reviews' &&
+                    popularReviews &&
+                        popularReviews.map((review) => {
+                            return(
+                                <ReviewItem review={review}/>
+                            )
+                        })
+                }
+                {activeItem === 'recent reviews' &&
+                    recentReviews &&
+                    recentReviews.map((review) => {
+                        return (
+                            <ReviewItem />
+                        )
+                    })
+                }
+            </Feed>
         </div>
     );
 }
