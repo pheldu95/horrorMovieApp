@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const MovieReviewsDisplay = ({movie}) => {
     const [activeItem, setActiveItem] = useState('popular reviews');
+    const [popularReviews, setPopularReviews] = useState([]);
+    const [recentReviews, setRecentReviews] = useState([]);
     const toggleReviewsView = (e, {name}) => {
         setActiveItem(name);
     }
@@ -30,8 +32,17 @@ const MovieReviewsDisplay = ({movie}) => {
         // })
     }
      const getPopularReviews = () =>{
-
+        axios({
+            method: 'GET',
+            url: `/api/reviews/${movie.id}`
+        }).then((response) => {
+            setPopularReviews(response.data.rows);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
      }
+
     return (
         <div>
             <Menu inverted pointing secondary>
@@ -52,6 +63,14 @@ const MovieReviewsDisplay = ({movie}) => {
                     Recent Reviews
                 </Menu.Item>
             </Menu>
+            {activeItem === 'popular reviews' &&
+                popularReviews &&
+                JSON.stringify(popularReviews[0])
+            }
+            {activeItem === 'recent reviews' &&
+                recentReviews &&
+                JSON.stringify(recentReviews[0])
+            }
 
         </div>
     );

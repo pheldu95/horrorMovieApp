@@ -23,6 +23,19 @@ router.post('/:movieId', (req, res) => {
         })
 });
 
+//get reviews in order of votes. for popular reviews display
+router.get('/:movieId', (req, res) => {
+    let movieId = req.params.movieId;
+    let queryText = `SELECT reviews.id, reviews.review, reviews.score, reviews.timestamp, reviews.votes, "user".username FROM reviews
+                    JOIN "user" ON "user".id = reviews.user_id
+                    WHERE reviews.movie_id = ${movieId}
+                    ORDER BY votes DESC;`;
+    pool.query(queryText).then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
 //check if user has submitted a review already
-
 module.exports = router;
