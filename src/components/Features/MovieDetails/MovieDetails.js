@@ -122,7 +122,7 @@ const MovieDetails = (props) => {
               <u>Subgenres:</u> 
               <br/>
               <Subgenres movie={movieDetails}/>
-              <MovieReview/>
+              <MovieReview movie={movieDetails}/>
               <Tags movie={movieDetails} />
             </Container>
             {/* {JSON.stringify(movieDetails)} */}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import { Form, TextArea, Menu, Rating, Button } from 'semantic-ui-react';
 import axios from 'axios';
@@ -7,10 +7,13 @@ import axios from 'axios';
 const MovieReview = ({movie}) => {
     const [reviewToggle, setReviewToggle] = useState(false);
     const [review, setReview] = useState();
-    const [score, setScore] = useState();
+    const [score, setScore] = useState(5);
+    const user = useSelector((state) => state.user);
 
     const submitReview = () => {
-        axios.post('/api/reviews', {review: review, score: score});
+        console.log(movie);
+        
+        axios.post(`/api/reviews/${movie.id}`, { review: review, score: score, timestamp: Date().toLocaleString(), userId: user.id});
     }
 
     const toggleReview = () =>{
