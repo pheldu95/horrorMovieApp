@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect, useSelector } from 'react-redux';
-import mapStoreToProps from '../../../redux/mapStoreToProps';
+import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import { Form, TextArea, Menu, Rating, Button } from 'semantic-ui-react';
 import axios from 'axios';
 

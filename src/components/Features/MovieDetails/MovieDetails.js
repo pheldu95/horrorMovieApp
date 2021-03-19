@@ -4,10 +4,11 @@ import mapStoreToProps from '../../../redux/mapStoreToProps';
 import axios from 'axios';
 import { Button, Container, Divider, Statistic } from 'semantic-ui-react';
 import './MovieDetails.css';
-import MovieReview from './MovieReview';
+import MovieReview from './MovieReviews/MovieReview';
 import Tags from './Tags/Tags';
 import Subgenres from './Subgenres/Subgenres';
 import { watchListChecker } from '../../App/Common/watchListChecker';
+import MovieReviewsDisplay from './MovieReviews/MovieReviewsDisplay';
 
 
 //we take props so that we can get the movie id from the url. using match.params
@@ -124,6 +125,10 @@ const MovieDetails = (props) => {
               <Subgenres movie={movieDetails}/>
               <MovieReview movie={movieDetails}/>
               <Tags movie={movieDetails} />
+              <br/>
+              <br/>
+              <Divider />
+              <MovieReviewsDisplay movie={movieDetails}/>
             </Container>
             {/* {JSON.stringify(movieDetails)} */}
           </div>
