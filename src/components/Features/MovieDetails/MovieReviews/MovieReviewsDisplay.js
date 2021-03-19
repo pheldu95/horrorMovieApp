@@ -20,22 +20,20 @@ const MovieReviewsDisplay = ({movie}) => {
     }, [])
 
     const getRecentReviews = () =>{
-        // axios({
-        //     method: 'GET',
-        //     url: `/api/reviews/${movieId}`
-        // }).then((response) => {
-        //     setMovieDetails(response.data);
-        //     let year = response.data.release_date.substring(0, 4);
-        //     setReleaseYear(year);
-        // }).catch((error) => {
-        //     console.log(error);
-        //     alert(error);
-        // })
+        axios({
+            method: 'GET',
+            url: `/api/reviews/recent/${movie.id}`
+        }).then((response) => {
+            setRecentReviews(response.data.rows);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
     }
      const getPopularReviews = () =>{
         axios({
             method: 'GET',
-            url: `/api/reviews/${movie.id}`
+            url: `/api/reviews/popular/${movie.id}`
         }).then((response) => {
             setPopularReviews(response.data.rows);
         }).catch((error) => {
@@ -77,7 +75,7 @@ const MovieReviewsDisplay = ({movie}) => {
                     recentReviews &&
                     recentReviews.map((review) => {
                         return (
-                            <ReviewItem />
+                            <ReviewItem review={review} />
                         )
                     })
                 }
