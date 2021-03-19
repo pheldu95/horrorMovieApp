@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
-import { Form, TextArea, Menu, Rating } from 'semantic-ui-react';
+import { Form, TextArea, Menu, Rating, Button } from 'semantic-ui-react';
+import axios from 'axios';
 
 const MovieReview = ({movie}) => {
     const [reviewToggle, setReviewToggle] = useState(false);
     const [review, setReview] = useState();
+    const [score, setScore] = useState();
 
     const submitReview = () => {
-        console.log(review);
-        
+        axios.post('/api/reviews', {review: review, score: score});
     }
 
     const toggleReview = () =>{
         setReviewToggle(!reviewToggle);
+    }
+
+    const handleRate = (e, { rating, maxRating }) =>{
+        setScore(rating);
     }
     return (
         <div>
@@ -29,7 +34,8 @@ const MovieReview = ({movie}) => {
             </Menu>
             {reviewToggle&&
                 <Form Form onSubmit={() => submitReview()}>
-                    <Rating icon='star' defaultRating={10} maxRating={10} />
+                    <Rating icon='star' defaultRating={10} maxRating={10} onRate = {handleRate}/>
+                    
                     <Form.Group>
                         
                         <TextArea
@@ -38,6 +44,10 @@ const MovieReview = ({movie}) => {
                             onChange={(event) => setReview(event.target.value)}
                         />
                     </Form.Group>
+                    <Form.Group>
+                        <Button color='red' onClick={() => setReviewToggle(false)}>Cancel</Button>
+                        <Button color='green'>Submit</Button>
+                    </Form.Group>   
                 </Form>
             }
             
