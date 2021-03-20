@@ -52,5 +52,18 @@ router.get('/recent/:movieId', (req, res) => {
         res.sendStatus(500);
     });
 })
+
 //check if user has submitted a review already
+router.get('/:movieId/:userId', (req, res) => {
+    let movieId = req.params.movieId;
+    let userId = req.params.userId;
+    let queryText = `SELECT * FROM reviews
+                    WHERE movie_id = $1 AND user_id = $2;`;
+    pool.query(queryText, [movieId, userId]).then((response) => {
+        res.send(response);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
 module.exports = router;

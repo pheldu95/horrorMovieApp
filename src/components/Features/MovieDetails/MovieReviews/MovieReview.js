@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { Form, TextArea, Menu, Rating, Button } from 'semantic-ui-react';
+import { Form, TextArea, Menu, Rating, Button, Feed } from 'semantic-ui-react';
 import axios from 'axios';
+import ReviewItem from './ReviewItem';
 
 const MovieReview = ({movie}) => {
     const [reviewToggle, setReviewToggle] = useState(false);
     const [review, setReview] = useState();
     const [score, setScore] = useState(5);
+    const [userReview, setUserReview] = useState({});
     const user = useSelector((state) => state.user);
 
+    useEffect(() => {
+        console.log('movie review useeffect');
+        getUserReview();
+    }, [])
+
+    const getUserReview = () => {
+        axios({
+            method: 'GET',
+            url: `/api/reviews/${movie.id}/${user.id}`
+        }).then((response) => {
+            setUserReview(response.data.rows[0]);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
+    }
+
     const submitReview = () => {
-        console.log(movie);
-        
         axios.post(`/api/reviews/${movie.id}`, { review: review, score: score, timestamp: Date().toLocaleString(), userId: user.id});
     }
 
@@ -25,16 +42,24 @@ const MovieReview = ({movie}) => {
     }
     return (
         <div>
-            <Menu inverted pointing secondary>
-                <Menu.Item
-                    name='review'
-                    active={review === true}
-                    onClick={toggleReview}
-                    style={{width:'20%'}}
-                >
-                    Write a review
-                </Menu.Item>
-            </Menu>
+            {userReview.review
+                ? <>
+                    <p>Your review:</p>
+                    <Feed>
+                        <ReviewItem review={userReview} />
+                    </Feed>
+                  </>
+                : <Menu inverted pointing secondary>
+                    <Menu.Item
+                        name='review'
+                        active={review === true}
+                        onClick={toggleReview}
+                        style={{width:'20%'}}
+                    >
+                        Write a review
+                    </Menu.Item>
+                </Menu>
+            }
             {reviewToggle&&
                 <Form Form onSubmit={() => submitReview()}>
                     <Rating icon='star' defaultRating={10} maxRating={10} onRate = {handleRate}/>
