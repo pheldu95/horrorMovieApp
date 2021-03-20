@@ -22,7 +22,9 @@ const MovieReview = ({movie}) => {
             method: 'GET',
             url: `/api/reviews/${movie.id}/${user.id}`
         }).then((response) => {
-            setUserReview(response.data.rows[0]);
+            if (response.data.rows.length > 0){
+                setUserReview(response.data.rows[0]);
+            }
         }).catch((error) => {
             console.log(error);
             alert(error);
