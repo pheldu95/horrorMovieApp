@@ -62,24 +62,27 @@ const MovieReviewsDisplay = ({movie}) => {
                     Recent Reviews
                 </Menu.Item>
             </Menu>
-            <Feed>
-                {activeItem === 'popular reviews' &&
-                    popularReviews &&
-                        popularReviews.map((review) => {
-                            return(
-                                <ReviewItem review={review}/>
+            {popularReviews.length > 0?
+                <Feed>
+                    {activeItem === 'popular reviews' &&
+                        popularReviews &&
+                            popularReviews.map((review) => {
+                                return(
+                                    <ReviewItem review={review}/>
+                                )
+                            })
+                    }
+                    {activeItem === 'recent reviews' &&
+                        recentReviews &&
+                        recentReviews.map((review) => {
+                            return (
+                                <ReviewItem review={review} />
                             )
                         })
-                }
-                {activeItem === 'recent reviews' &&
-                    recentReviews &&
-                    recentReviews.map((review) => {
-                        return (
-                            <ReviewItem review={review} />
-                        )
-                    })
-                }
-            </Feed>
+                    }
+                </Feed>
+                : <b>Nobody has reviewed this movie yet.</b>
+            }       
         </div>
     );
 }
