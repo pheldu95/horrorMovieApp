@@ -5,6 +5,7 @@ import axios from 'axios';
 import MovieList from '../Features/MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
+import LoaderModal from '../Loader/LoaderModal';
 
 class UserPage extends Component {
   state ={
@@ -14,6 +15,9 @@ class UserPage extends Component {
     page: 0
   }
   componentDidMount(){
+    this.props.dispatch({
+      type: 'LOADING',
+    })
     this.getWatchList();
     //this.getPopHorror();
   }
@@ -25,6 +29,9 @@ class UserPage extends Component {
       this.props.dispatch({
         type: 'SET_MOVIES',
         payload: response.data
+      })
+      this.props.dispatch({
+        type: 'LOADED',
       })
       // console.log('response going to state:', response);
       // this.setState({
@@ -78,6 +85,7 @@ class UserPage extends Component {
     let movies = this.state.movies;
     let watchList = this.state.watchList;
     const activeItem = this.state.activeItem;
+    if (this.props.store.loader) return <LoaderModal />
     return (
       <div>
         {/* <Search/> */}

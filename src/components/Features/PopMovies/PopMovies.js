@@ -15,6 +15,9 @@ class MoviesView extends Component {
         page: this.props.match.params.page
     }
     componentDidMount() {
+        this.props.dispatch({
+            type: 'LOADING',
+        })
         this.getWatchList();
         this.setState({
             page: this.props.match.params.page

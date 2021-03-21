@@ -3,15 +3,19 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../redux/mapStoreToProps';
 import MovieList from '../MovieList/MovieList';
 import axios from 'axios';
+import LoaderModal from '../../Loader/LoaderModal';
 
 const SearchResults = (props) => {
     const dispatch = useDispatch();
     const tagId = props.match.params.tagId;
     const [tagName, setTagName] = useState();
     const movies = useSelector((state) => state.movies)
+    const loader = useSelector((state) => state.loader)
     useEffect(() => {
         console.log('tag search useeefect');
-        
+        dispatch({
+            type: 'LOADING',
+        })
         axios({
             method: 'GET',
             url: `/api/tags/tagTitle/${tagId}`
@@ -27,6 +31,7 @@ const SearchResults = (props) => {
         })
     }, [tagId, dispatch])
 
+    if (loader) return <LoaderModal />
     return (
         <>
             <h1 style={{ textAlign: 'center'}}>{tagName}</h1>

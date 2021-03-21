@@ -43,6 +43,7 @@ function* getTagMovies(action) {
         moviesToSendToReducer.push(response.data);
     }
     yield put({ type: 'SET_MOVIES', payload: moviesToSendToReducer });
+    yield put({ type: 'LOADED' })
 }
 
 function* tagSaga() {

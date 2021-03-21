@@ -9,6 +9,7 @@ import Tags from './Tags/Tags';
 import Subgenres from './Subgenres/Subgenres';
 import { watchListChecker } from '../../App/Common/watchListChecker';
 import MovieReviewsDisplay from './MovieReviews/MovieReviewsDisplay';
+import LoaderModal from '../../Loader/LoaderModal';
 
 
 //we take props so that we can get the movie id from the url. using match.params
@@ -19,6 +20,7 @@ const MovieDetails = (props) => {
   const [opac, setOpac] = useState();
   const [onWatchList, setOnWatchList] = useState(false);
   const watchList = useSelector((state) => state.watchList)
+  const loader = useSelector((state) => state.loader)
 
   const getMovieDetails = () => {
     props.dispatch({
@@ -81,7 +83,7 @@ const MovieDetails = (props) => {
     setOpac(opacityCoefficient);
   };
 
-  
+  if (loader) return <LoaderModal />
   return (
       <div className = 'standardContainer'>
         {movieDetails&&
