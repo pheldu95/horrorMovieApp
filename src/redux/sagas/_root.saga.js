@@ -6,6 +6,7 @@ import watchListSaga from './watchList.saga';
 import searchSaga from './search.saga';
 import tagsSaga from './tags.saga';
 import subgenresSaga from './subgenres.saga';
+import loaderSaga from './loader.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     watchListSaga(),
     searchSaga(),
     tagsSaga(),
-    subgenresSaga()
+    subgenresSaga(),
+    loaderSaga()
   ]);
 }

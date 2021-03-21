@@ -4,6 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 function* search(action){
     let query = action.payload
     try{
+        yield put({ type: 'LOADING'});
         let response = yield axios.get(`/api/horror/search/${query}/1`);
         let horrorMovies = [];
         let pages = response.data.total_pages;
@@ -21,6 +22,7 @@ function* search(action){
         // console.log(horrorMovies);
         
         yield put({ type: 'SET_MOVIES', payload: horrorMovies });
+        yield put({ type: 'LOADED' });
     }catch(error){
         console.log(error);
     }
