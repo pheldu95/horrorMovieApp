@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react'
+import { Dimmer } from 'semantic-ui-react'
 
 const LoaderModal = () => {
     // const loader = useSelector((state) => state.loader)
     return (
         <Dimmer active >
-            <Loader>Loading</Loader>
+            <div className="loader"></div>
         </Dimmer>
     );
 }

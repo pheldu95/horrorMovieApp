@@ -5,6 +5,7 @@ import axios from 'axios';
 import MovieList from '../MovieList/MovieList';
 import { Menu } from 'semantic-ui-react';
 import { Button } from 'semantic-ui-react';
+import LoaderModal from '../../Loader/LoaderModal';
 
 class MoviesView extends Component {
     state = {
@@ -29,6 +30,9 @@ class MoviesView extends Component {
                 type: 'SET_MOVIES',
                 payload: response.data
             })
+            this.props.dispatch({
+                type: 'LOADED',
+            });
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -71,6 +75,9 @@ class MoviesView extends Component {
     }
 
     nextPage = () =>{
+        this.props.dispatch({
+            type: 'LOADING',
+        })
         let next = Number(this.props.match.params.page) + 1;
         this.setState({
             page: next
@@ -106,6 +113,7 @@ class MoviesView extends Component {
         let movies = this.state.movies;
         let watchList = this.state.watchList;
         const activeItem = this.state.activeItem;
+        if (this.props.store.loader) return <LoaderModal />
         return (
             <div>
                 <Button onClick={() => this.lastPage()}>Back</Button>
