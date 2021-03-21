@@ -46,6 +46,7 @@ const MovieReview = ({movie}) => {
 
     const submitReview = () => {
         axios.post(`/api/reviews/${movie.id}`, { review: review, score: score, timestamp: Date().toLocaleString(), userId: user.id});
+        setReviewToggle(false);
     }
 
     const toggleReview = () =>{
@@ -79,9 +80,7 @@ const MovieReview = ({movie}) => {
             {reviewToggle&&
                 <Form Form onSubmit={() => submitReview()}>
                     <Rating icon='star' defaultRating={10} maxRating={10} onRate = {handleRate}/>
-                    
-                    <Form.Group>
-                        
+                    <Form.Group> 
                         <TextArea
                             placeholder=''
                             style={{ minHeight: 100, width: '50%' }}
