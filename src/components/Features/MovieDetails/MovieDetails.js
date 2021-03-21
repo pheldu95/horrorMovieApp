@@ -21,6 +21,9 @@ const MovieDetails = (props) => {
   const watchList = useSelector((state) => state.watchList)
 
   const getMovieDetails = () => {
+    props.dispatch({
+      type: 'LOADING'
+    });
     axios({
       method: 'GET',
       url: `/api/horror/details/${movieId}`
@@ -28,10 +31,14 @@ const MovieDetails = (props) => {
       setMovieDetails(response.data);
       let year = response.data.release_date.substring(0, 4);
       setReleaseYear(year);
+      props.dispatch({
+        type: 'LOADED'
+      });
     }).catch((error) => {
       console.log(error);
       alert(error);
     })
+    
   }
 
   const watchListCheck = () => {
