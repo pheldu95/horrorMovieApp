@@ -3,7 +3,6 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 //will send the move the user has added to their watchlist to the server
 function* addToWatchList(action) {
-    console.log(action.payload);
     try {
         yield axios({
             method: 'POST',

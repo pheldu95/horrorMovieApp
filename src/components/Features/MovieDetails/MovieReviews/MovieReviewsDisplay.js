@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import { Menu, Feed } from 'semantic-ui-react';
 import axios from 'axios';
@@ -9,7 +9,6 @@ const MovieReviewsDisplay = ({movie}) => {
     const [activeItem, setActiveItem] = useState('popular reviews');
     const [popularReviews, setPopularReviews] = useState([]);
     const [recentReviews, setRecentReviews] = useState([]);
-    const user = useSelector((state) => state.user);
 
     const toggleReviewsView = (e, {name}) => {
         setActiveItem(name);

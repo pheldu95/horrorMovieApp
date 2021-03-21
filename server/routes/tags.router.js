@@ -43,7 +43,6 @@ router.get('/:movieId', (req, res) => {
 router.post('/:movieId', (req, res) => {
     let tagId = req.body.tag;
     let movieId = req.params.movieId;
-    console.log(tagId, movieId);
     
     let queryText = `INSERT INTO movie_to_tag (movie_id, tag_id) VALUES (${movieId}, ${tagId});`;
     pool.query(queryText)
@@ -73,7 +72,6 @@ router.put('/:movieId/', (req, res) => {
 //get movies for a tag, sorted by count
 router.get('/getTagMovies/:tagId', (req, res) => {
     let tagId = req.params.tagId;
-    console.log(tagId);
 
     let queryText = `SELECT count, movie_id
                     FROM movie_to_tag

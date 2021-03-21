@@ -2,7 +2,6 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 function* upSubgenreCounts(action) {
-    console.log('subgenres to up count', action.payload);
     let subgenres = action.payload.subgenres;
     let movieId = action.payload.movieId;
     for (let subgenre of subgenres) {
@@ -18,7 +17,6 @@ function* upSubgenreCounts(action) {
     }
 }
 function* postNewSubgenres(action) {
-    console.log('new subgenres', action.payload);
     let subgenres = action.payload.subgenres;
     let movieId = action.payload.movieId;
     for (let subgenre of subgenres) {

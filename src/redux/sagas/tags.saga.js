@@ -17,7 +17,6 @@ function* upTagCounts(action) {
     }
 }
 function* postNewTags(action) {
-    console.log('newtags', action.payload);
     let tags = action.payload.tags;
     let movieId = action.payload.movieId;
     for (let tag of tags) {

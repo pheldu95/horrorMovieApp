@@ -195,8 +195,10 @@ input {
   font-size: 130%;
 }
 
+/* --------loader modal css--------- */
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
+  /* background-color: #b90e0a; */
+  border: 16px solid #efefef; /* Light grey */
   border-top: 16px solid #b90e0a; /* Blue */
   border-radius: 50%;
   width: 120px;

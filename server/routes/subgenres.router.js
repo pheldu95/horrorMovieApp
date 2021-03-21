@@ -41,8 +41,7 @@ router.get('/:movieId', (req, res) => {
 router.post('/:movieId', (req, res) => {
     let subgenreId = req.body.subgenre;
     let movieId = req.params.movieId;
-    console.log(subgenreId, movieId);
-
+    
     let queryText = `INSERT INTO movie_to_subgenre (movie_id, subgenre_id) VALUES (${movieId}, ${subgenreId});`;
     pool.query(queryText)
         .then(result => {
@@ -70,7 +69,6 @@ router.put('/:movieId', (req, res) => {
 //get movies for a subgenre, sorted by count
 router.get('/getSubgenreMovies/:subgenreId', (req, res) => {
     let subgenreId = req.params.subgenreId;
-    console.log(subgenreId);
     
     let queryText = `SELECT count, movie_id
                     FROM movie_to_subgenre
