@@ -66,4 +66,16 @@ router.get('/:movieId/:userId', (req, res) => {
         res.sendStatus(500);
     });
 })
+
+//delete user's review
+router.delete('/:reviewId', (req, res) => {
+    let reviewId = req.params.reviewId;
+    let queryText = `DELETE FROM reviews WHERE id = ${reviewId}`;
+    pool.query(queryText).then((results) => {
+        res.sendStatus(200)
+    }).catch((err) => {
+        res.sendStatus(500);
+        console.log('error deleting item', err);
+    })
+})
 module.exports = router;

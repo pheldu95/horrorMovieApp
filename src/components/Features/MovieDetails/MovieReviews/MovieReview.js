@@ -31,6 +31,19 @@ const MovieReview = ({movie}) => {
         })
     }
 
+    const deleteReview = () =>{
+        axios({
+            method: 'DELETE',
+            url: `/api/reviews/${userReview.id}`
+        }).then((response) => {
+        
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
+        setUserReview({});
+    }
+
     const submitReview = () => {
         axios.post(`/api/reviews/${movie.id}`, { review: review, score: score, timestamp: Date().toLocaleString(), userId: user.id});
     }
@@ -49,6 +62,7 @@ const MovieReview = ({movie}) => {
                     <p>Your review:</p>
                     <Feed>
                         <ReviewItem review={userReview} />
+                        <Button color='red' size='mini' onClick={() => deleteReview()}>Delete</Button>
                     </Feed>
                   </>
                 : <Menu inverted pointing secondary>
