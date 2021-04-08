@@ -79,7 +79,7 @@ const MovieReviewsDisplay = ({movie}) => {
                         recentReviews &&
                         recentReviews.map((review) => {
                             return (
-                                <ReviewItem review={review} />
+                                <ReviewItem review={review}/>
                             )
                         })
                     }

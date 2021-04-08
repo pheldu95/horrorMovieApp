@@ -58,7 +58,7 @@ const MovieReview = ({movie}) => {
     }
     return (
         <div>
-            {userReview.review
+            {userReview.review || userReview.score
                 ? <>
                     <p>Your review:</p>
                     <Feed>
