@@ -15,6 +15,7 @@ const watchListRouter = require('./routes/watchList.router');
 const subgenresRouter = require('./routes/subgenres.router');
 const tagsRouter = require('./routes/tags.router');
 const reviewsRouter = require('./routes/reviews.router');
+const upvotesRouter = require('./routes/upvotes.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -33,6 +34,7 @@ app.use('/api/watchList', watchListRouter);
 app.use('/api/subgenres', subgenresRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/reviews', reviewsRouter);
+app.use('/api/upvotes', upvotesRouter);
 
 // Serve static files
 app.use(express.static('build'));

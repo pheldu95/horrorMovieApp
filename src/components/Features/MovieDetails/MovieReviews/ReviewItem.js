@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
 import { Feed, Statistic } from 'semantic-ui-react';
 import axios from 'axios';
@@ -7,22 +7,32 @@ import imageSrc from '../../../../assets/default-user-image.png'
 
 const ReviewItem = ({ review }) => {
     const user = useSelector((state) => state.user);
-    const handleDownVote = () =>{
+    const [upvoteCount, setUpvoteCount] = useState();
+
+    useEffect(() => {
+       console.log('reviewitem useEffect');
+       getUpvotes();
+    }, [getUpvotes]);
+
+    const getUpvotes = () => {
+        console.log(review.id);
+        let id = review.id;
         axios({
-            method: 'POST',
-            url: `/api/reviews/downvote/${review.id}`,
-            data: { userId: user.id, timestamp: Date().toLocaleString() }
+            method: 'GET',
+            url: `/api/upvotes/upvoteCount/${id}`
         }).then((response) => {
-            console.log(response);
+            console.log(response.data);
+            setUpvoteCount(response.data);
         }).catch((error) => {
             console.log(error);
             alert(error);
         })
     }
-    const handleUpVote = () => {
+
+    const handleDownVote = () =>{
         axios({
             method: 'POST',
-            url: `/api/reviews/upvote/${review.id}`,
+            url: `/api/upvotes/down/${review.id}`,
             data: { userId: user.id, timestamp: Date().toLocaleString() }
         }).then((response) => {
             console.log(response);
@@ -30,6 +40,21 @@ const ReviewItem = ({ review }) => {
             console.log(error);
             alert(error);
         })
+        setUpvoteCount(upvoteCount - 1);
+    }
+    const handleUpVote = () => {
+        axios({
+            method: 'POST',
+            url: `/api/upvotes/up/${review.id}`,
+            data: { userId: user.id, timestamp: Date().toLocaleString() }
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
+        //getUpvotes();
+        setUpvoteCount(upvoteCount + 1);
     }
     return (
         <Feed.Event>
@@ -37,7 +62,8 @@ const ReviewItem = ({ review }) => {
             <Feed.Content >
                 <Feed.Date style={{ color: '#b90e0a' }}>{review.username}</Feed.Date>
                 <Feed.Summary style={{ color:'#f8f8f8'}}>
-                    {review.review}{review.votes}
+                    {review.review}{upvoteCount}
+                    {/* {upvoteCount} */}
                     <button onClick = {() => handleDownVote()}>down</button>
                     <button onClick={() => handleUpVote()}>up</button>
                     <Statistic.Group size='mini'>

@@ -79,40 +79,4 @@ router.delete('/:reviewId', (req, res) => {
     })
 })
 
-//post upvote
-router.post('/upvote/:reviewId', (req, res) => {
-    console.log('upvote', req.body, req.params);
-    let reviewId = req.params.reviewId;
-    let userId = req.body.userId;
-    let timestamp = req.body.timestamp;
-    timestamp = timestamp.split('-');
-    timestamp = timestamp[0];
-    let queryText = `INSERT INTO review_votes (review_id, user_id, timestamp, vote)
-                    VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [reviewId, userId, timestamp, 1])
-        .then(result => {
-            res.sendStatus(201);
-        }).catch(error => {
-            console.log('error adding upvote');
-            res.sendStatus(500);
-        })
-});
-//downvote review
-router.post('/downvote/:reviewId', (req, res) => {
-    console.log('downvote', req.body, req.params);
-    let reviewId = req.params.reviewId;
-    let userId = req.body.userId;
-    let timestamp = req.body.timestamp;
-    timestamp = timestamp.split('-');
-    timestamp = timestamp[0];
-    let queryText = `INSERT INTO review_votes (review_id, user_id, timestamp, vote)
-                    VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [reviewId, userId, timestamp, -1])
-        .then(result => {
-            res.sendStatus(201);
-        }).catch(error => {
-            console.log('error adding downvote');
-            res.sendStatus(500);
-        })
-});
 module.exports = router;
