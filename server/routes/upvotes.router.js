@@ -17,9 +17,24 @@ router.get('/upvoteCount/:reviewId', (req, res) => {
     });
 })
 
+//get users vote on a review
+router.get('/userVote/:reviewId', (req, res) => {
+    const userId = req.user.id;
+    let reviewId = req.params.reviewId;
+    let queryText = `SELECT review_votes.id, review_votes.vote
+                    FROM review_votes
+                    WHERE review_id = $1 AND user_id = $2;`;
+    pool.query(queryText, [reviewId, userId]).then((response) => {
+        res.send(response.rows);
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    });
+})
+
 //post upvote
 router.post('/up/:reviewId', (req, res) => {
-    console.log('upvote', req.body, req.params);
+    // console.log('upvote', req.body, req.params);
     let reviewId = req.params.reviewId;
     let userId = req.body.userId;
     let timestamp = req.body.timestamp;
@@ -35,9 +50,10 @@ router.post('/up/:reviewId', (req, res) => {
             res.sendStatus(500);
         })
 });
+
 //downvote review
 router.post('/down/:reviewId', (req, res) => {
-    console.log('downvote', req.body, req.params);
+    // console.log('downvote', req.body, req.params);
     let reviewId = req.params.reviewId;
     let userId = req.body.userId;
     let timestamp = req.body.timestamp;

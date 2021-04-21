@@ -8,21 +8,40 @@ import imageSrc from '../../../../assets/default-user-image.png'
 const ReviewItem = ({ review }) => {
     const user = useSelector((state) => state.user);
     const [upvoteCount, setUpvoteCount] = useState();
+    const [userVote, setUserVote] = useState();
 
     useEffect(() => {
        console.log('reviewitem useEffect');
        getUpvotes();
+       getUserVote();
     }, [getUpvotes]);
 
     const getUpvotes = () => {
-        console.log(review.id);
         let id = review.id;
         axios({
             method: 'GET',
             url: `/api/upvotes/upvoteCount/${id}`
         }).then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setUpvoteCount(response.data);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        })
+    }
+
+    const getUserVote = () => {
+        let id = review.id;
+        axios({
+            method: 'GET',
+            url: `/api/upvotes/userVote/${id}`
+        }).then((response) => {
+            console.log(response.data);
+            if(response.data.length === 0){
+                setUserVote(0);
+            }else{
+                setUserVote(response.data[0].vote);
+            }
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -41,6 +60,7 @@ const ReviewItem = ({ review }) => {
             alert(error);
         })
         setUpvoteCount(upvoteCount - 1);
+        setUserVote(-1);
     }
     const handleUpVote = () => {
         axios({
@@ -55,7 +75,14 @@ const ReviewItem = ({ review }) => {
         })
         //getUpvotes();
         setUpvoteCount(upvoteCount + 1);
+        setUserVote(1);
     }
+
+    const resetVote = () => {
+
+
+    }
+
     return (
         <Feed.Event>
             <Feed.Label image={imageSrc} />
@@ -64,8 +91,17 @@ const ReviewItem = ({ review }) => {
                 <Feed.Summary style={{ color:'#f8f8f8'}}>
                     {review.review}{upvoteCount}
                     {/* {upvoteCount} */}
-                    <button onClick = {() => handleDownVote()}>down</button>
-                    <button onClick={() => handleUpVote()}>up</button>
+                   
+                    {userVote === -1 ?
+                        <button style={{ color: 'blue' }} onClick={() => resetVote()}>down</button>
+                        : <button onClick={() => handleDownVote()}>down</button>
+                    }
+                    {/* <button onClick = {() => handleDownVote()}>down</button> */}
+                    {userVote === 1 ?
+                        <button style={{color:'red'}}onClick={() => resetVote()}>up</button>
+                        : <button onClick={() => handleUpVote()}>up</button>
+                    }
+                    
                     <Statistic.Group size='mini'>
                         <Statistic inverted >
                             <Statistic.Value>{review.score}/10</Statistic.Value>
