@@ -70,13 +70,36 @@ router.get('/:movieId/:userId', (req, res) => {
 //delete user's review
 router.delete('/:reviewId', (req, res) => {
     let reviewId = req.params.reviewId;
-    let queryText = `DELETE FROM reviews WHERE id = ${reviewId}`;
-    pool.query(queryText).then((results) => {
-        res.sendStatus(200)
-    }).catch((err) => {
-        res.sendStatus(500);
-        console.log('error deleting review', err);
-    })
+    // let queryText = `DELETE FROM reviews WHERE id = ${reviewId}`;
+    // pool.query(queryText).then((results) => {
+    //     res.sendStatus(200)
+    // }).catch((err) => {
+    //     res.sendStatus(500);
+    //     console.log('error deleting review', err);
+    // })
+    ; (async () => {
+        const client = await pool.connect()
+        try {
+            await client.query('BEGIN')
+            //delete all the stuff from budget categories
+            let queryText = 'DELETE FROM review_votes WHERE review_id=$1';
+            await client.query(queryText, [reviewId]);
+            //delete the election from the elections table
+            queryText = 'DELETE FROM reviews WHERE id = $1';
+            await client.query(queryText, [reviewId]);
+            await client.query('COMMIT')
+        } catch (error) {
+            //if it errors out, the db will rollback and restore the deleted data
+            await client.query('ROLLBACK')
+            throw error
+        } finally {
+            res.sendStatus(200)
+            //must release the client at the end
+            //or else the client will remain unavailable if you
+            //want to use it again
+            client.release()
+        }
+    })().catch(e => console.error(e.stack))
 })
 
 module.exports = router;
