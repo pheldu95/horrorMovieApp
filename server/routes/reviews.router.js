@@ -26,7 +26,7 @@ router.post('/:movieId', (req, res) => {
 //get reviews in order of votes. for popular reviews display
 router.get('/popular/:movieId', (req, res) => {
     let movieId = req.params.movieId;
-    let queryText = `SELECT reviews.id, reviews.review, reviews.score, reviews.timestamp, reviews.votes, "user".username FROM reviews
+    let queryText = `SELECT reviews.id, reviews.review, reviews.score, reviews.timestamp, reviews.votes, reviews.user_id, "user".username FROM reviews
                     JOIN "user" ON "user".id = reviews.user_id
                     WHERE reviews.movie_id = ${movieId}
                     ORDER BY votes DESC;`;
@@ -41,7 +41,7 @@ router.get('/popular/:movieId', (req, res) => {
 //get reviews in order of recency
 router.get('/recent/:movieId', (req, res) => {
     let movieId = req.params.movieId;
-    let queryText = `SELECT reviews.id, reviews.review, reviews.score, reviews.timestamp, reviews.votes, "user".username FROM reviews
+    let queryText = `SELECT reviews.id, reviews.review, reviews.score, reviews.timestamp, reviews.votes, reviews.user_id, "user".username FROM reviews
                     JOIN "user" ON "user".id = reviews.user_id
                     WHERE reviews.movie_id = ${movieId}
                     ORDER BY timestamp DESC;`;
@@ -75,7 +75,7 @@ router.delete('/:reviewId', (req, res) => {
         res.sendStatus(200)
     }).catch((err) => {
         res.sendStatus(500);
-        console.log('error deleting item', err);
+        console.log('error deleting review', err);
     })
 })
 

@@ -70,4 +70,17 @@ router.post('/down/:reviewId', (req, res) => {
         })
 });
 
+//delete vote
+router.delete('/delete/:reviewId', (req, res) => {
+    let reviewId = req.params.reviewId;
+    let userId = req.user.id;
+    
+    let queryText = `DELETE FROM review_votes WHERE review_id = $1 AND user_id = $2;`;
+    pool.query(queryText, [reviewId, userId]).then((results) => {
+        res.sendStatus(200)
+    }).catch((err) => {
+        res.sendStatus(500);
+        console.log('error deleting vote', err);
+    })
+});
 module.exports = router;

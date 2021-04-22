@@ -59,7 +59,11 @@ const ReviewItem = ({ review }) => {
             console.log(error);
             alert(error);
         })
-        setUpvoteCount(upvoteCount - 1);
+        if (userVote === 1) {
+            setUpvoteCount(upvoteCount - 2);
+        } else {
+            setUpvoteCount(upvoteCount - 1);
+        }
         setUserVote(-1);
     }
     const handleUpVote = () => {
@@ -74,13 +78,30 @@ const ReviewItem = ({ review }) => {
             alert(error);
         })
         //getUpvotes();
-        setUpvoteCount(upvoteCount + 1);
+        if(userVote === -1){
+            setUpvoteCount(upvoteCount + 2);
+        }else{
+            setUpvoteCount(upvoteCount + 1);
+        }
         setUserVote(1);
     }
 
-    const resetVote = () => {
-
-
+    const resetVote = (operation) => {
+        axios({
+            method: 'DELETE',
+            url: `/api/upvotes/delete/${review.id}`,
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        });
+        if(operation === 'plusOne'){
+            setUpvoteCount(upvoteCount + 1);
+        } else if(operation === 'minusOne'){
+            setUpvoteCount(upvoteCount - 1);
+        }
+        setUserVote(0);
     }
 
     return (
@@ -91,17 +112,15 @@ const ReviewItem = ({ review }) => {
                 <Feed.Summary style={{ color:'#f8f8f8'}}>
                     {review.review}{upvoteCount}
                     {/* {upvoteCount} */}
-                   
-                    {userVote === -1 ?
-                        <button style={{ color: 'blue' }} onClick={() => resetVote()}>down</button>
-                        : <button onClick={() => handleDownVote()}>down</button>
-                    }
-                    {/* <button onClick = {() => handleDownVote()}>down</button> */}
-                    {userVote === 1 ?
-                        <button style={{color:'red'}}onClick={() => resetVote()}>up</button>
-                        : <button onClick={() => handleUpVote()}>up</button>
-                    }
-                    
+                        {userVote === -1 ?
+                            user.id != review.user_id && <button style={{ color: 'blue' }} onClick={() => resetVote('plusOne')}>down</button>
+                            : user.id != review.user_id && <button onClick={() => handleDownVote()}>down</button>
+                        }
+                        {/* <button onClick = {() => handleDownVote()}>down</button> */}
+                        {userVote === 1 && user.id != review.user_id ?
+                            user.id != review.user_id && <button style={{color:'red'}}onClick={() => resetVote('minusOne')}>up</button>
+                            : user.id != review.user_id && <button onClick={() => handleUpVote()}>up</button>
+                        }
                     <Statistic.Group size='mini'>
                         <Statistic inverted >
                             <Statistic.Value>{review.score}/10</Statistic.Value>
