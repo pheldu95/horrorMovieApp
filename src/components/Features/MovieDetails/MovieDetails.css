@@ -57,3 +57,26 @@
     color: #b90e0a;
     box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
 }
+
+.voteContainer {
+    /* position: relative; */
+    /* display:inline-block; */
+    /* vertical-align:middle; */
+    /* max-width: 100px; */
+    padding: 20px;
+    /* -ms-flex-align: center; */
+    /* align-items:unset; */
+    /* display: -ms-flexbox; */
+    display: flex;
+    fill: inherit;
+    /* -ms-flex-direction: column; */
+    flex-direction: column;
+}
+
+.upvote{
+    z-index: 2; 
+}
+
+.downvote{
+    z-index: 2;
+}
