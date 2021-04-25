@@ -50,6 +50,15 @@ const ReviewItem = ({ review }) => {
 
     const handleDownVote = () =>{
         axios({
+            method: 'DELETE',
+            url: `/api/upvotes/delete/${review.id}`,
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        });
+        axios({
             method: 'POST',
             url: `/api/upvotes/down/${review.id}`,
             data: { userId: user.id, timestamp: Date().toLocaleString() }
@@ -67,6 +76,15 @@ const ReviewItem = ({ review }) => {
         setUserVote(-1);
     }
     const handleUpVote = () => {
+        axios({
+            method: 'DELETE',
+            url: `/api/upvotes/delete/${review.id}`,
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
+            alert(error);
+        });
         axios({
             method: 'POST',
             url: `/api/upvotes/up/${review.id}`,
