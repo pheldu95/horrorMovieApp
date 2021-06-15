@@ -37,6 +37,11 @@ const SubgenrePicker = ({submit}) => {
         }
     }
 
+    const handleSubmit = (picks) => {
+        submit(picks);
+        setOpen(false);
+    }
+
     return (
         <Modal
             onClose={() => setOpen(false)}
@@ -49,7 +54,7 @@ const SubgenrePicker = ({submit}) => {
             <br />
             <Button.Group>
                 <Button>Cancel</Button>
-                <Button onClick={() => submit(picks)}>Submit</Button>
+                <Button onClick={() => handleSubmit(picks)}>Submit</Button>
             </Button.Group>
         </Modal>
     );
