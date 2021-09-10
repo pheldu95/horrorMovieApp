@@ -22,11 +22,8 @@ class LandingPage extends Component {
         <h2>{this.state.heading}</h2>
 
         <div className="grid">
-          <div className="grid-col grid-col_8">
-            <p>
-              
-            </p>
-          </div>
+          {/* <div className="grid-col grid-col_8">
+          </div> */}
           <div className="grid-col grid-col_4">
             <RegisterForm />
 
