@@ -53,7 +53,7 @@ const SubgenrePicker = ({submit}) => {
             <br />
             <br />
             <Button.Group>
-                <Button>Cancel</Button>
+                <Button onClick={() => setOpen(false)}>Cancel</Button>
                 <Button onClick={() => handleSubmit(picks)}>Submit</Button>
             </Button.Group>
         </Modal>
