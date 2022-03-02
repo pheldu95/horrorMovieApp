@@ -5,10 +5,8 @@ import { Menu, Feed } from 'semantic-ui-react';
 import axios from 'axios';
 import ReviewItem from './ReviewItem';
 
-const MovieReviewsDisplay = ({movie}) => {
+const MovieReviewsDisplay = ({ movie, popularReviews, recentReviews, getRecentReviews, getPopularReviews}) => {
     const [activeItem, setActiveItem] = useState('popular reviews');
-    const [popularReviews, setPopularReviews] = useState([]);
-    const [recentReviews, setRecentReviews] = useState([]);
 
     const toggleReviewsView = (e, {name}) => {
         setActiveItem(name);
@@ -19,31 +17,6 @@ const MovieReviewsDisplay = ({movie}) => {
         getRecentReviews();
         getPopularReviews();
     }, [])
-
-    const getRecentReviews = () =>{
-        axios({
-            method: 'GET',
-            url: `/api/reviews/recent/${movie.id}`
-        }).then((response) => {
-            console.log(response.data.rows);
-            
-            setRecentReviews(response.data.rows);
-        }).catch((error) => {
-            console.log(error);
-            alert(error);
-        })
-    }
-     const getPopularReviews = () =>{
-        axios({
-            method: 'GET',
-            url: `/api/reviews/popular/${movie.id}`
-        }).then((response) => {
-            setPopularReviews(response.data.rows);
-        }).catch((error) => {
-            console.log(error);
-            alert(error);
-        })
-     }
 
     return (
         <div>

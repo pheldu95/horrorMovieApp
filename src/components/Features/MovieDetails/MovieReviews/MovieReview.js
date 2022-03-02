@@ -5,7 +5,7 @@ import { Form, TextArea, Menu, Rating, Button, Feed } from 'semantic-ui-react';
 import axios from 'axios';
 import ReviewItem from './ReviewItem';
 
-const MovieReview = ({movie}) => {
+const MovieReview = ({ movie, getRecentReviews, getPopularReviews }) => {
     const [reviewToggle, setReviewToggle] = useState(false);
     const [review, setReview] = useState();
     const [score, setScore] = useState(5);
@@ -36,7 +36,8 @@ const MovieReview = ({movie}) => {
             method: 'DELETE',
             url: `/api/reviews/${userReview.id}`
         }).then((response) => {
-        
+            getRecentReviews();
+            getPopularReviews();
         }).catch((error) => {
             console.log(error);
             alert(error);
@@ -45,7 +46,20 @@ const MovieReview = ({movie}) => {
     }
 
     const submitReview = () => {
-        axios.post(`/api/reviews/${movie.id}`, { review: review, score: score, timestamp: Date().toLocaleString(), userId: user.id});
+        axios.post(`/api/reviews/${movie.id}`, 
+            { 
+                review: review, score: score, 
+                timestamp: Date().toLocaleString(), 
+                userId: user.id
+            }
+        ).then((response)=>{
+            console.log(response);
+            getRecentReviews();
+            getPopularReviews();
+            getUserReview();
+        }, (error)=>{
+            console.log(error);
+        });
         setReviewToggle(false);
     }
 

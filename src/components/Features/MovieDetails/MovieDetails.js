@@ -21,6 +21,8 @@ const MovieDetails = (props) => {
   const [onWatchList, setOnWatchList] = useState(false);
   const watchList = useSelector((state) => state.watchList)
   const loader = useSelector((state) => state.loader)
+  const [popularReviews, setPopularReviews] = useState([]);
+  const [recentReviews, setRecentReviews] = useState([]);
 
   const getMovieDetails = () => {
     props.dispatch({
@@ -83,6 +85,31 @@ const MovieDetails = (props) => {
     setOpac(opacityCoefficient);
   };
 
+  const getRecentReviews = () => {
+    axios({
+      method: 'GET',
+      url: `/api/reviews/recent/${movieDetails.id}`
+    }).then((response) => {
+      console.log(response.data.rows);
+
+      setRecentReviews(response.data.rows);
+    }).catch((error) => {
+      console.log(error);
+      alert(error);
+    })
+  }
+  const getPopularReviews = () => {
+    axios({
+      method: 'GET',
+      url: `/api/reviews/popular/${movieDetails.id}`
+    }).then((response) => {
+      setPopularReviews(response.data.rows);
+    }).catch((error) => {
+      console.log(error);
+      alert(error);
+    })
+  }
+
   if (loader) return <LoaderModal />
   return (
       <div className = 'standardContainer'>
@@ -136,8 +163,19 @@ const MovieDetails = (props) => {
               <br/>
               <br/>
               <Divider />
-              <MovieReview movie={movieDetails} />
-              <MovieReviewsDisplay movie={movieDetails}/>
+              <MovieReview movie={movieDetails}
+                popularReviews={popularReviews}
+                recentReviews={recentReviews}
+                getRecentReviews={getRecentReviews}
+                getPopularReviews={getPopularReviews}
+              />
+              <MovieReviewsDisplay 
+                movie={movieDetails}
+                popularReviews={popularReviews}
+                recentReviews={recentReviews}
+                getRecentReviews={getRecentReviews}
+                getPopularReviews={getPopularReviews}
+              />
             </Container>
             {/* {JSON.stringify(movieDetails)} */}
           </div>
