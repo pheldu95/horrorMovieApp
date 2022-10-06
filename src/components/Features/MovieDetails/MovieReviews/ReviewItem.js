@@ -117,29 +117,32 @@ const ReviewItem = ({ review }) => {
             <Feed.Content >
                 <Feed.Date style={{ color: '#b90e0a' }}>{review.username}</Feed.Date>
                 <Feed.Summary style={{ color:'#f8f8f8'}}>
-                    {review.review}{upvoteCount}
-                    {/* {upvoteCount} */}
-                    <div className='voteContainer'>
-                        <div>
-                            {userVote === 1 && user.id != review.user_id ?
-                                user.id != review.user_id && <button className='upvote' style={{ color: 'red' }} onClick={() => resetVote('minusOne')}>up</button>
-                                : user.id != review.user_id && <button className='upvote' onClick={() => handleUpVote()}>up</button>
-                            }
-                        </div>
-                        <div>
-                            {userVote === -1 ?
-                                user.id != review.user_id && <button className = 'downvote' style={{ color: 'blue' }} onClick={() => resetVote('plusOne')}>down</button>
-                                : user.id != review.user_id && <button className='downvote' onClick={() => handleDownVote()}>down</button>
-                            }
-                        </div>
-                        {/* <button onClick = {() => handleDownVote()}>down</button> */}
-                        
-                    </div>
+                    {review.review}
                     <Statistic.Group size='mini'>
                         <Statistic inverted >
                             <Statistic.Value>{review.score}/10</Statistic.Value>
                         </Statistic>
                     </Statistic.Group>
+                    {/* {upvoteCount} */}
+                    <div className='voteContainer'>
+                        <div class='upvoteCount'>{upvoteCount}</div>
+                        <div style={{ float: 'left', display: 'inline', width: '5%' }}>
+                            <div>
+                                {userVote === 1 && user.id != review.user_id ?
+                                    user.id != review.user_id && <button className='upvote' style={{ color: 'red' }} onClick={() => resetVote('minusOne')}>up</button>
+                                    : user.id != review.user_id && <button className='upvote' onClick={() => handleUpVote()}>up</button>
+                                }
+                            </div>
+                            <div>
+                                {userVote === -1 ?
+                                    user.id != review.user_id && <button className = 'downvote' style={{ color: 'blue' }} onClick={() => resetVote('plusOne')}>down</button>
+                                    : user.id != review.user_id && <button className='downvote' onClick={() => handleDownVote()}>down</button>
+                                }
+                            </div>
+                        </div>
+                        {/* <button onClick = {() => handleDownVote()}>down</button> */}
+                    </div>
+                    
                 </Feed.Summary>
             </Feed.Content>
         </Feed.Event>

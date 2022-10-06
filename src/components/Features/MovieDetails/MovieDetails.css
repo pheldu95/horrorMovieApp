@@ -67,7 +67,7 @@
     /* -ms-flex-align: center; */
     /* align-items:unset; */
     /* display: -ms-flexbox; */
-    display: flex;
+    /* display: flex; */
     fill: inherit;
     /* -ms-flex-direction: column; */
     flex-direction: column;
@@ -79,4 +79,10 @@
 
 .downvote{
     z-index: 2;
+}
+
+.upvoteCount{
+    float: left;
+     display: inline;
+     width: 5%;
 }
