@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { connect, useSelector } from 'react-redux';
 import mapStoreToProps from '../../../../redux/mapStoreToProps';
-import { Feed, Statistic } from 'semantic-ui-react';
+import { Feed, Icon, Statistic } from 'semantic-ui-react';
 import axios from 'axios';
 import imageSrc from '../../../../assets/default-user-image.png'
 import '../MovieDetails.css';
@@ -123,20 +123,20 @@ const ReviewItem = ({ review }) => {
                             <Statistic.Value>{review.score}/10</Statistic.Value>
                         </Statistic>
                     </Statistic.Group>
-                    {/* {upvoteCount} */}
+                    
                     <div className='voteContainer'>
                         <div class='upvoteCount'>{upvoteCount}</div>
                         <div style={{ float: 'left', display: 'inline', width: '5%' }}>
                             <div>
                                 {userVote === 1 && user.id != review.user_id ?
-                                    user.id != review.user_id && <button className='upvote' style={{ color: 'red' }} onClick={() => resetVote('minusOne')}>up</button>
-                                    : user.id != review.user_id && <button className='upvote' onClick={() => handleUpVote()}>up</button>
+                                    user.id != review.user_id && <Icon link name='angle up' onClick={() => resetVote('minusOne')}/>
+                                    : user.id != review.user_id && <Icon link name='angle up' onClick={() => handleUpVote()}/>
                                 }
                             </div>
                             <div>
                                 {userVote === -1 ?
-                                    user.id != review.user_id && <button className = 'downvote' style={{ color: 'blue' }} onClick={() => resetVote('plusOne')}>down</button>
-                                    : user.id != review.user_id && <button className='downvote' onClick={() => handleDownVote()}>down</button>
+                                    user.id != review.user_id && <Icon link name='angle down' onClick={() => resetVote('plusOne')}/>
+                                    : user.id != review.user_id && <Icon link name='angle down' onClick={() => handleDownVote()}/>
                                 }
                             </div>
                         </div>
