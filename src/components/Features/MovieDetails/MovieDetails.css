@@ -63,14 +63,17 @@
     /* display:inline-block; */
     /* vertical-align:middle; */
     /* max-width: 100px; */
-    padding: 20px;
+    /* padding: 20px; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     /* -ms-flex-align: center; */
     /* align-items:unset; */
     /* display: -ms-flexbox; */
-    /* display: flex; */
+    display: flex;
     fill: inherit;
     /* -ms-flex-direction: column; */
-    flex-direction: column;
+    /* flex-direction: column; */
+    align-items: center;
 }
 
 .upvote{
