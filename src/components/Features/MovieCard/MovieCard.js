@@ -5,6 +5,7 @@ import './MovieCard.css';
 import { useHistory } from "react-router-dom";
 import { Button, ButtonContent, Icon } from 'semantic-ui-react';
 import {watchListChecker} from '../../App/Common/watchListChecker';
+import Watched from '../Watched/Watched';
 
 const MovieCard = ({movie}) => {
   //in functional components, need useHistory to have accest to the usual this.props.history stuff
@@ -21,8 +22,6 @@ const MovieCard = ({movie}) => {
   //because added [watchList], the component will run useEffect again if
   //the watchlist changes.
   useEffect(() => {
-    console.log('moviecard useEffect');
-    
     watchListCheck();
   }, [watchList, watchListCheck]);
 
@@ -75,6 +74,7 @@ const MovieCard = ({movie}) => {
                 </ButtonContent>
               </Button>
           }
+          <Watched movieId={movie.id}/>
         </div>
        
       </div>
