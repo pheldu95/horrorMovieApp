@@ -31,6 +31,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/horror', horrorRouter);
 app.use('/api/watchList', watchListRouter);
+app.use('/api/watchedList', watchedListRouter);
 app.use('/api/subgenres', subgenresRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/reviews', reviewsRouter);
